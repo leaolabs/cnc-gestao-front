@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Nav() {
     return (
         <>
@@ -5,45 +7,31 @@ export default function Nav() {
                 <div className="position-sticky pt-3">
                     <ul className="nav flex-column">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">
-                                <span className="bi bi-house"></span>
-                                &nbsp; Dashboard
-                            </a>
+                            <Link href="/">
+                                <a className="nav-link active" aria-current="page">
+                                    <span className="bi bi-house"></span>
+                                    &nbsp; Dashboard
+                                </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">
                                 <span className="bi bi-file-earmark-bar-graph"></span>
-                                &nbsp; Orders
+                                &nbsp; Relatórios
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <span data-feather="shopping-cart"></span>
-                                Products
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <span data-feather="users"></span>
-                                Customers
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <span data-feather="bar-chart-2"></span>
-                                Reports
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <span data-feather="layers"></span>
-                                Integrations
-                            </a>
+                            <Link href="/pessoa/pessoa/">
+                                <a className="nav-link">
+                                    <span className="bi bi-person-bounding-box"></span>
+                                    &nbsp; Pessoas
+                                </a>
+                            </Link>
                         </li>
                     </ul>
 
                     <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Saved reports</span>
+                        <span>Outras configurações</span>
                         <a className="link-secondary" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -52,25 +40,13 @@ export default function Nav() {
                         <li className="nav-item">
                             <a className="nav-link" href="#">
                                 <span data-feather="file-text"></span>
-                                Current month
+                                &nbsp; Regiões do caminho
                             </a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">
                                 <span data-feather="file-text"></span>
-                                Last quarter
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Social engagement
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Year-end sale
+                                &nbsp; Comunidades
                             </a>
                         </li>
                     </ul>

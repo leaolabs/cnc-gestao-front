@@ -1,5 +1,12 @@
+import Home from ".."
+import PessoaList from "../../components/pessoa/pessoa-list"
+
 function Pessoa() {
-    return <div>Estou em pessoa</div>
+    return (
+        <Home>
+            <PessoaList />
+        </Home>
+    )
 }
 
 export default Pessoa

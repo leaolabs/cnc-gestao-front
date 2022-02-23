@@ -25,14 +25,12 @@ export default function RegioesList() {
                         </tr>
                     </thead>
                     <tbody>
-                        {regioes.map((regiao) => {
-                            return (
-                                <tr>
-                                    <td>{regiao.id_regiao_caminho}</td>
-                                    <td>{regiao.no_regiao_caminho}</td>
-                                </tr>
-                            )
-                        })}
+                        {regioes.map((regiao: any) => (
+                            <tr key={regiao.id}>
+                                <td>{regiao.id_regiao_caminho}</td>
+                                <td>{regiao.no_regiao_caminho}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

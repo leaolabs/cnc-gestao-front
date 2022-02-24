@@ -16,6 +16,7 @@ export default function RegioesList() {
     return (
         <>
             <h2>Regiões do Caminho</h2>
+
             <div className="table-responsive">
                 <table className="table table-striped table-sm">
                     <thead>

@@ -46,10 +46,12 @@ export default function Nav() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <span className="bi bi-people-fill"></span>
-                                &nbsp; Comunidades
-                            </a>
+                            <Link href="/comunidade/comunidade/">
+                                <a className="nav-link">
+                                    <span className="bi bi-people-fill"></span>
+                                    &nbsp; Comunidades
+                                </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>

@@ -29,24 +29,25 @@ export default function ComunidadeList() {
         return cidades.filter(cidade => cidade.id_cidade === id_cidade)
     }
 
-    function getEstado(id_estado: number) {
+    function getEstado(id_estado:number) {
         return estados.filter(uf => uf.id_estado === id_estado)
     }
 
     return (
         <>
             <div className="row">
-                {estados.filter(e => e.id_pais === 1).map((estado: Estado) => (
-                    <div id={estado.id_estado.toString()} className="col-md-3 py-1">
+                {comunidades.map((comunidade: Comunidade) => (
+                    <div id={comunidade.id_comunidade.toString()} className="col-md-3 py-1">
                         <div className="card" style={{ width: "18rem;" }}>
                             <svg className="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
                             <div className="card-body">
-                                <h5 className="card-title text-center">{estado.no_estado}</h5>
+                                <h5 className="card-title text-center">ALAGOAS</h5>
                                 <p className="card-text"></p>
                             </div>
                             <ul className="list-group list-group-flush">
-                                <li className="list-group-item">Pais: Brasil </li>
-                                <li className="list-group-item">Sigla: {estado.sg_estado} </li>
+                                <li className="list-group-item">Comunidade: {comunidade.nu_comunidade}</li>
+                                <li className="list-group-item">Quantidade de irmãos: {comunidade.nu_qtde_irmaos}</li>
+                                <li className="list-group-item">Outras info: {comunidade.tx_observacao} </li>
                             </ul>
                             <div className="card-body">
                                 <a href="#" className="card-link">Mais detalhes</a>

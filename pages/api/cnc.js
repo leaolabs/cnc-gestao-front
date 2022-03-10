@@ -43,11 +43,22 @@ function getEstados() {
   }
 }
 
+function getPaises() {
+  const { data, error } = useSWR(`${baseUrl}/paises`, fetcher)
+
+  return {
+    paisesData: data,
+    isLoadingPais: !error && !data,
+    isErrorPais: error
+  }
+}
+
 const CNC = {
   getComunidades,
   getLocalidades,
   getCidades,
   getEstados,
+  getPaises,
 }
 
 export default CNC

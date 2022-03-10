@@ -1,41 +1,35 @@
-import Cidade from "../../model/Cidade"
-import Comunidade from "../../model/Comunidade"
 import Estado from "../../model/Estado"
-import Localidade from "../../model/Localidade"
 import CNC from '../../pages/api/cnc'
+import Select from "react-select"
+import Pais from "../../model/Pais"
 
 export default function ComunidadeList() {
-    const { comunidadesData, isLoadingComunidade, isErrorComunidade } = CNC.getComunidades()
-    const { localidadesData, isLoadingLocalidade, isErrorLocalidade } = CNC.getLocalidades()
-    const { cidadesData, isLoadingCidade, isErrorCidade } = CNC.getCidades()
     const { estadosData, isLoadingEstado, isErrorEstado } = CNC.getEstados()
+    const { paisesData, isLoadingPais, isErrorPais } = CNC.getPaises()
 
-    if (isErrorComunidade) return <div>Falha ao carregar comunidades do caminho</div>
-    if (isErrorLocalidade) return <div>Falha ao carregar localidades do caminho</div>
-    if (isErrorCidade) return <div>Falha ao carregar cidades do caminho</div>
     if (isErrorEstado) return <div>Falha ao carregar cidades do caminho</div>
-
-    if (isLoadingComunidade) return <div>Carregando ...</div>
-    if (isLoadingLocalidade) return <div>Carregando ...</div>
-    if (isLoadingCidade) return <div>Carregando ...</div>
+    if (isErrorPais) return <div>Falha ao carregar paises do caminho</div>
+    
     if (isLoadingEstado) return <div>Carregando ...</div>
+    if (isLoadingPais) return <div>Carregando ...</div>
 
-    const comunidades: Comunidade[] = comunidadesData.data;
-    const localidades: Localidade[] = localidadesData.data;
-    const cidades: Cidade[] = cidadesData.data;
     const estados: Estado[] = estadosData.data;
+    const paises: Pais[] = paisesData.data;
 
-    function getCidade(id_cidade: number) {
-        return cidades.filter(cidade => cidade.id_cidade === id_cidade)
-    }
-
-    function getEstado(id_estado: number) {
-        return estados.filter(uf => uf.id_estado === id_estado)
-    }
+    const optionsPaises = [];
+    paises.map((pais) => {
+        optionsPaises.push({
+            value: pais.id_pais,
+            label: pais.no_pais
+        })
+    })
 
     return (
         <>
-            <div className="row">
+            <div className="row">                
+                <Select options={optionsPaises} />
+                <br />
+                <br />
                 {estados.filter(e => e.id_pais === 1).map((estado: Estado) => (
                     <div id={estado.id_estado.toString()} className="col-md-3 py-1">
                         <div className="card" style={{ width: "18rem;" }}>
@@ -45,8 +39,7 @@ export default function ComunidadeList() {
                                 <p className="card-text"></p>
                             </div>
                             <ul className="list-group list-group-flush">
-                                <li className="list-group-item">Pais: Brasil </li>
-                                <li className="list-group-item">Sigla: {estado.sg_estado} </li>
+                                <li className="list-group-item"> <b> Sigla: </b> {estado.sg_estado} </li>
                             </ul>
                             <div className="card-body">
                                 <a href="#" className="card-link">Mais detalhes</a>

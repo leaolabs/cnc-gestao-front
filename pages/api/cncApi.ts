@@ -1,9 +1,9 @@
 import useSWR from "swr"
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
-const baseUrl = 'https://apicncbrasil.cn.org.br/api'
+const baseUrl: string = 'https://apicncbrasil.cn.org.br/api'
 
-function getComunidades() {
+export function ComunidadesData() {
   const { data, error } = useSWR(`${baseUrl}/comunidades`, fetcher)
 
   return {
@@ -13,7 +13,7 @@ function getComunidades() {
   }
 }
 
-function getLocalidades() {
+export function LocalidadesData() {
   const { data, error } = useSWR(`${baseUrl}/localidades`, fetcher)
 
   return {
@@ -23,7 +23,7 @@ function getLocalidades() {
   }
 }
 
-function getCidades() {
+export function CidadesData() {
   const { data, error } = useSWR(`${baseUrl}/cidades`, fetcher)
 
   return {
@@ -33,7 +33,7 @@ function getCidades() {
   }
 }
 
-function getEstados() {
+export function EstadosData() {
   const { data, error } = useSWR(`${baseUrl}/estados`, fetcher)
 
   return {
@@ -43,7 +43,7 @@ function getEstados() {
   }
 }
 
-function getPaises() {
+export function PaisesData() {
   const { data, error } = useSWR(`${baseUrl}/paises`, fetcher)
 
   return {
@@ -52,13 +52,3 @@ function getPaises() {
     isErrorPais: error
   }
 }
-
-const CNC = {
-  getComunidades,
-  getLocalidades,
-  getCidades,
-  getEstados,
-  getPaises,
-}
-
-export default CNC

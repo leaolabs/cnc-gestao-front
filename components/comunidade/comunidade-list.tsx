@@ -1,11 +1,11 @@
 import Estado from "../../model/Estado"
-import CNC from '../../pages/api/cnc'
+import { EstadosData, PaisesData} from "../../pages/api/cncApi"
 import Select from "react-select"
 import Pais from "../../model/Pais"
 
 export default function ComunidadeList() {
-    const { estadosData, isLoadingEstado, isErrorEstado } = CNC.getEstados()
-    const { paisesData, isLoadingPais, isErrorPais } = CNC.getPaises()
+    const { estadosData, isLoadingEstado, isErrorEstado } = EstadosData()
+    const { paisesData, isLoadingPais, isErrorPais } = PaisesData()
 
     if (isErrorEstado) return <div>Falha ao carregar cidades do caminho</div>
     if (isErrorPais) return <div>Falha ao carregar paises do caminho</div>
@@ -31,7 +31,7 @@ export default function ComunidadeList() {
                 <br />
                 <br />
                 {estados.filter(e => e.id_pais === 1).map((estado: Estado) => (
-                    <div id={estado.id_estado.toString()} className="col-md-3 py-1">
+                    <div key={estado.id_estado.toString()} className="col-md-3 py-1">
                         <div className="card" style={{ width: "18rem;" }}>
                             <svg className="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
                             <div className="card-body">

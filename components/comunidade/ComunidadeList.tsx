@@ -2,18 +2,18 @@ import Select from "react-select"
 import { useEffect, useState } from "react"
 import Estado from "../../model/Estado"
 import Pais from "../../model/Pais"
-import { EstadosData, PaisesData, useFetch } from "../../pages/api/cncApi"
+import { EstadosData, PaisesData } from "../../pages/api/cncApi"
 import Link from "next/link"
 
+const initialState: Pais = {
+    id_pais: 1,
+    co_ddi: 55,
+    no_continente: "América",
+    no_pais: "Brasil",
+    sg_pais: "BR"
+}
 
 export default function ComunidadeList(): JSX.Element {
-    const initialState: Pais = {
-        id_pais: 1,
-        co_ddi: 55,
-        no_continente: "America",
-        no_pais: "Brasil",
-        sg_pais: "BR"
-    }
 
     const [paises, setPaises] = useState<Pais[]>()
     const [pais, setPais] = useState<Pais>(initialState)
@@ -57,31 +57,28 @@ export default function ComunidadeList(): JSX.Element {
             <Select
                 placeholder="Selecione um pais"
                 onChange={op => onChangeSelectPais(op)}
-                defaultValue={{value: 1, label: "Brasil"}}
+                defaultValue={{ value: 1, label: "Brasil" }}
                 options={optionsPaises} />
 
-            <br /> <br />
 
-            {pais !== null ? (
-                <div className="row row-cols-1 row-cols-md-3 g-4">
-                    {estados.filter(uf => uf.id_pais === pais.id_pais).map((estado: Estado) => (
-                        <div key={`estado-id-${estado.id_estado}`} className="col">
-                            <div className="card">
-                                <div className="card-body">
-                                    <h5 className="card-title">{estado.no_estado}</h5>
-                                    <h6 className="card-subtitle mb-2 text-muted">{estado.sg_estado}</h6>
-                                    <p className="card-text">
-                                        Comunidades: TODO <br />
-                                    </p>
-                                    <Link href={`${pais.id_pais}`}>
-                                        <a className="card-link">Mais detalhes</a>
-                                    </Link>
-                                </div>
+            <div className="row row-cols-1 row-cols-md-3 g-4">
+                {estados.filter(uf => uf.id_pais === pais.id_pais).map((estado: Estado) => (
+                    <div key={`estado-id-${estado.id_estado}`} className="col">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">{estado.no_estado}</h5>
+                                <h6 className="card-subtitle mb-2 text-muted">{estado.sg_estado}</h6>
+                                <p className="card-text">
+                                    Comunidades: TODO <br />
+                                </p>
+                                <Link href={`${pais.id_pais}`}>
+                                    <a className="card-link">Mais detalhes</a>
+                                </Link>
                             </div>
                         </div>
-                    ))}
-                </div>
-            ) : false}
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

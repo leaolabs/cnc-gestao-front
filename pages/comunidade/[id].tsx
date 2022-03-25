@@ -1,5 +1,9 @@
+import Base from "..";
+
 export default function ComunidadeId() {
     return (
-        <h1>Comunidade RONALDO</h1>
+        <Base>
+            <h1>Comunidade RONALDO</h1>
+        </Base>
     )
 }

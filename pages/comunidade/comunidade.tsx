@@ -1,10 +1,10 @@
-import Home from ".."
+import Base from ".."
 import ComunidadeList from "../../components/comunidade/ComunidadeList"
 
 export default function Comunidade() {
     return (
-        <Home>
+        <Base>
             <ComunidadeList />
-        </Home>
+        </Base>
     )
 }

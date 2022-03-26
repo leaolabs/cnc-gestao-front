@@ -1,9 +1,11 @@
 import Select from "react-select"
 import { useEffect, useState } from "react"
+import Link from "next/link"
+import ClipLoader from "react-spinners/ClipLoader"
+
+import { EstadosData, PaisesData } from "../../pages/api/cncApi"
 import Estado from "../../model/Estado"
 import Pais from "../../model/Pais"
-import { EstadosData, PaisesData } from "../../pages/api/cncApi"
-import Link from "next/link"
 
 const initialState: Pais = {
     id_pais: 1,
@@ -34,8 +36,8 @@ export default function ComunidadeList(): JSX.Element {
     const { paisesData, isLoadingPais, isErrorPais } = PaisesData()
     const { estadosData, isLoadingEstado, isErrorEstado } = EstadosData()
 
-    if (!paises) return <div>Carregando paises...</div>
-    if (!estados) return <div>Carregando estados...</div>
+    if (!paises) return <ClipLoader />
+    if (!estados) return <ClipLoader />
 
     const optionsPaises = [];
 

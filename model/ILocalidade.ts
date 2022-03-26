@@ -1,4 +1,4 @@
-export default interface Localidade {
+export default interface ILocalidade {
     id_localidade: number;
     co_localidade: string;
     id_diocese: string;

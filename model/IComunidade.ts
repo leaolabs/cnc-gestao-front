@@ -1,4 +1,4 @@
-export default interface Comunidade {
+export default interface IComunidade {
     id_comunidade: number;
     id_situacao_comunidade: number;
     id_localidade: number;

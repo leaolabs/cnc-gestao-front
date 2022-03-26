@@ -1,4 +1,4 @@
-export default interface Estado {
+export default interface IEstado {
     id_estado: number;
     id_pais: number;
     sg_estado: string;

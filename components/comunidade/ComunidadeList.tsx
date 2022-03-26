@@ -4,10 +4,10 @@ import Link from "next/link"
 import ClipLoader from "react-spinners/ClipLoader"
 
 import { EstadosData, PaisesData } from "../../pages/api/cncApi"
-import Estado from "../../model/Estado"
-import Pais from "../../model/Pais"
+import IEstado from "../../model/IEstado"
+import IPais from "../../model/IPais"
 
-const initialState: Pais = {
+const initialState: IPais = {
     id_pais: 1,
     co_ddi: 55,
     no_continente: "América",
@@ -17,8 +17,8 @@ const initialState: Pais = {
 
 export default function ComunidadeList(): JSX.Element {
 
-    const [paises, setPaises] = useState<Pais[]>()
-    const [pais, setPais] = useState<Pais>(initialState)
+    const [paises, setPaises] = useState<IPais[]>()
+    const [pais, setPais] = useState<IPais>(initialState)
 
     useEffect(function persistPaises() {
         if (paisesData) {
@@ -26,7 +26,7 @@ export default function ComunidadeList(): JSX.Element {
         }
     })
 
-    const [estados, setEstados] = useState<Estado[]>()
+    const [estados, setEstados] = useState<IEstado[]>()
     useEffect(function persistEstados() {
         if (estadosData) {
             setEstados(estadosData.data)
@@ -64,7 +64,7 @@ export default function ComunidadeList(): JSX.Element {
 
 
             <div className="row row-cols-1 row-cols-md-3 g-4">
-                {estados.filter(uf => uf.id_pais === pais.id_pais).map((estado: Estado) => (
+                {estados.filter(uf => uf.id_pais === pais.id_pais).map((estado: IEstado) => (
                     <div key={`estado-id-${estado.id_estado}`} className="col">
                         <div className="card">
                             <div className="card-body">
@@ -73,8 +73,14 @@ export default function ComunidadeList(): JSX.Element {
                                 <p className="card-text">
                                     Comunidades: TODO <br />
                                 </p>
-                                <Link href={`${pais.id_pais}`}>
-                                    <a className="card-link">Mais detalhes</a>
+                                <Link href={{
+                                    pathname: `estados/[id]`,
+                                    query: {
+                                        id: estado.id_estado,
+                                        nomeEstado: estado.no_estado
+                                    }
+                                }} >
+                                    Mais detalhes
                                 </Link>
                             </div>
                         </div>

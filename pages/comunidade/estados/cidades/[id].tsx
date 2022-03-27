@@ -9,39 +9,38 @@ import { LocalidadesData, TipoDiocesesData, TipoLocaisData } from "../../../api/
 
 export default function CidadeId() {
 
+    const router = useRouter()
+    const { id, nomeCidade } = router.query
+
+    const { localidadesData, isLoadingLocalidade, isErrorLocalidade } = LocalidadesData()
     const [localidades, setLocalidades] = useState<ILocalidade[]>()
     useEffect(function persistirLocalidades() {
         if (localidadesData) setLocalidades(localidadesData.data)
-    })
+    }, [localidadesData])
 
+    const { tipoDiocesesData, isLoadingTipoDioceses, isErrorTipoDioceses } = TipoDiocesesData()
     const [tipoDioceses, setTipoDioceses] = useState<ITipoDiocese[]>()
     useEffect(function persistirTipoDioceses() {
         if (tipoDiocesesData) setTipoDioceses(tipoDiocesesData.data)
-    })
+    }, [tipoDiocesesData])
 
+    const { tipoLocaisData, isLoadingTipoLocais, isErrorTipoLocais } = TipoLocaisData()
     const [tipoLocais, setTipoLocais] = useState<ITipoLocal[]>()
     useEffect(function persistTipoLocais() {
         if (tipoLocaisData) setTipoLocais(tipoLocaisData.data)
-    })
+    }, [tipoLocaisData])
 
-    const { localidadesData, isLoadingLocalidade, isErrorLocalidade } = LocalidadesData()
-    const { tipoDiocesesData, isLoadingTipoDioceses, isErrorTipoDioceses } = TipoDiocesesData()
-    const { tipoLocaisData, isLoadingTipoLocais, isErrorTipoLocais } = TipoLocaisData()
 
     if (!localidades) return <ClipLoader />
     if (!tipoDioceses) return <ClipLoader />
 
-    const router = useRouter()
-    const { id, nomeCidade } = router.query
-
-    console.log(tipoDioceses)
 
     return (
         <Base>
             <div className="row">
                 <h2>Cidade: {nomeCidade}</h2>
                 {localidades.filter(l => l.id_cidade === +id).map((localidade) => (
-                    <div className="col">
+                    <div key={`localidade-card-${localidade.id_localidade}`} className="col">
                         <div className="card" style={{ width: "18rem" }}>
                             {/* <img src="" className="card-img-top" alt="Catedral Franca" /> */}
                             <div className="card-body">

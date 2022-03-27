@@ -19,22 +19,22 @@ export default function ComunidadeList(): JSX.Element {
 
     const [paises, setPaises] = useState<IPais[]>()
     const [pais, setPais] = useState<IPais>(initialState)
+    const [estados, setEstados] = useState<IEstado[]>()
 
+    const { paisesData, isLoadingPais, isErrorPais } = PaisesData()
     useEffect(function persistPaises() {
         if (paisesData) {
             setPaises(paisesData.data)
         }
-    })
+    }, [paisesData])
 
-    const [estados, setEstados] = useState<IEstado[]>()
+    const { estadosData, isLoadingEstado, isErrorEstado } = EstadosData()
     useEffect(function persistEstados() {
         if (estadosData) {
             setEstados(estadosData.data)
         }
-    })
+    }, [estadosData])
 
-    const { paisesData, isLoadingPais, isErrorPais } = PaisesData()
-    const { estadosData, isLoadingEstado, isErrorEstado } = EstadosData()
 
     if (!paises) return <ClipLoader />
     if (!estados) return <ClipLoader />

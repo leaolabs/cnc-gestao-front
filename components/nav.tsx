@@ -15,10 +15,13 @@ export default function Nav() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <span className="bi bi-file-earmark-bar-graph"></span>
-                                &nbsp; Relatórios
-                            </a>
+                            <Link href="/relatorios">
+                                <a className="nav-link">
+                                    <span className="bi bi-file-earmark-bar-graph"></span>
+                                    &nbsp; Relatórios
+                                </a>
+
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <Link href="/pessoa/pessoa/">

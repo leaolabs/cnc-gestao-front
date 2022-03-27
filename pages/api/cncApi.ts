@@ -54,3 +54,22 @@ export function PaisesData() {
   }
 }
 
+export function TipoDiocesesData() {
+  const { data, error } = useSWR(`${baseUrl}/tipo_dioceses`, fetcher)
+
+  return {
+    tipoDiocesesData: data,
+    isLoadingTipoDioceses: !error && !data,
+    isErrorTipoDioceses: error
+  }
+}
+
+export function TipoLocaisData() {
+  const { data, error } = useSWR(`${baseUrl}/tipo_locais`, fetcher)
+
+  return {
+    tipoLocaisData: data,
+    isLoadingTipoLocais: !error && !data,
+    isErrorTipoLocais: error
+  }
+}

@@ -1,4 +1,5 @@
 import { Console } from "console"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 import ClipLoader from "react-spinners/ClipLoader"
 import ICidade from "../../../model/ICidade"
@@ -29,7 +30,17 @@ export default function TableBody(props: TableBodyProps): JSX.Element {
                     <td>{cidade.no_cidade}</td>
                     <td>123</td>
                     <td>39829</td>
-                    <td> <a href="#"> mais detalhes</a> </td>
+                    <td>
+                        <Link href={{
+                            pathname: "cidades/[id]",
+                            query: {
+                                id: cidade.id_cidade,
+                                nomeCidade: cidade.no_cidade
+                            }
+                        }}>
+                            mais detalhes
+                        </Link>
+                    </td>
                 </tr>
             ))}
         </tbody>

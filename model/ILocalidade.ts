@@ -1,7 +1,7 @@
 export default interface ILocalidade {
     id_localidade: number;
     co_localidade: string;
-    id_diocese: string;
+    id_diocese: number;
     id_tipo_local: number;
     id_cidade: number;
     no_localidade: string;

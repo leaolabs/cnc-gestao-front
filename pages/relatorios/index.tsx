@@ -22,7 +22,7 @@ export default function Relatorios() {
         <Base>
             <div>
                 <h3>Teste</h3>
-                <Image src={caminhoLogo.src} alt="Caminho Logo" />
+                <Image src={caminhoLogo.src} alt="Caminho Logo" width={300} height={200} />
                 <button onClick={gerarCabecalho}>Teste</button>
             </div>
         </Base>

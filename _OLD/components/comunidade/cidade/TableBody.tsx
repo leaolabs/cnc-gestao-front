@@ -1,4 +1,3 @@
-import { Console } from "console"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import ClipLoader from "react-spinners/ClipLoader"

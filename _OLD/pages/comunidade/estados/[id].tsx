@@ -1,6 +1,4 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { ClipLoader } from "react-spinners";
 import Base from "../..";
 import TableBody from "../../../components/comunidade/cidade/TableBody";
 

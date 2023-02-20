@@ -61,7 +61,7 @@ export default function BaseMaster({ children }: any) {
           </div>
 
           {/* content */}
-          <div className="flex-1 p-10 text-2xl font-bold bg-red-200">
+          <div className="flex-1 p-10 text-2xl font-bold bg-lime-50">
             {children}
           </div>
         </div>

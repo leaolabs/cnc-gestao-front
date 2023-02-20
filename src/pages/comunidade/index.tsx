@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Select, { OptionsOrGroups } from "react-select";
 import { ClipLoader } from "react-spinners";
 import BaseMaster from "..";
+import TituloDashboard from "../../components/dashboard/Titulo";
 import IEstado from "../../model/IEstado";
 import IPais from "../../model/IPais";
 import { PaisesData, EstadosData } from "../api/cncApi";
@@ -48,74 +49,51 @@ export default function Comunidade(): JSX.Element {
     | undefined = [];
 
   paises.map((p) => {
-    optionsPaises.push({
+    optionsPaises?.push({
       value: p.id_pais,
       label: p.no_pais,
     });
   });
 
   function onChangeSelectPais(option: { value: number; label: string }): void {
-    const paisSelecionado = paises.find((p) => p.id_pais === option.value);
-    setPais(paisSelecionado);
+    const paisSelecionado = paises?.find((p) => p.id_pais === option.value);
+    if (paisSelecionado) setPais(paisSelecionado);
   }
 
   return (
     <BaseMaster>
-      <h1>Pagina comunidade</h1>
+      <TituloDashboard
+        titulo="Comunidade"
+        subTitulo="Selecione um país / estado"
+      />
+
       <Select
+        className="mt-2"
         onChange={(op) => onChangeSelectPais(op)}
         options={optionsPaises}
         defaultValue={{ value: 1, label: "Brasil" }}
         placeholder="Selecione um pais"
       />
 
-      <div className="">
-        <table className="table-auto">
-          <thead>
-            <tr>
-              <th>Song</th>
-              <th>Artist</th>
-              <th>Year</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-              <td>Malcolm Lockyer</td>
-              <td>1961</td>
-            </tr>
-            <tr>
-              <td>Witchy Woman</td>
-              <td>The Eagles</td>
-              <td>1972</td>
-            </tr>
-            <tr>
-              <td>Shining Star</td>
-              <td>Earth, Wind, and Fire</td>
-              <td>1975</td>
-            </tr>
-          </tbody>
-        </table>
-        ​
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
         {estados
           .filter((uf) => uf.id_pais === pais.id_pais)
           .map((estado: IEstado) => (
-            <div key={`estado-id-${estado.id_estado}`} className="">
-              {estado.no_estado}
-              {estado.sg_estado}
-
-              <Link
-                href={{
-                  pathname: `estados/[id]`,
-                  query: {
-                    id: estado.id_estado,
-                    nomeEstado: estado.no_estado,
-                  },
-                }}
-              >
-                Mais detalhes
-              </Link>
-            </div>
+            <Link
+              key={`estado-id-${estado.id_estado}`}
+              href={{
+                pathname: `comunidade/estados/[id]`,
+                query: {
+                  id: estado.id_estado,
+                  nomeEstado: estado.no_estado,
+                },
+              }}
+            >
+              <div className="flex justify-center border border-green-700 rounded-lg p-2 font-light hover:font-bold bg-amber-50 hover:bg-amber-100 text-green-900">
+                <div className="pr-3 hidden sm:block">{estado.no_estado}</div>
+                <div className="font-semibold">{estado.sg_estado}</div>
+              </div>
+            </Link>
           ))}
       </div>
     </BaseMaster>

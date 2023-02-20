@@ -19,7 +19,7 @@ export default function BaseMaster({ children }: any) {
           {/* mobile menu bar */}
           <div className="md:hidden bg-gray-700 text-gray-100 flex justify-between">
             {/* logo */}
-            <Link href={"#"} className="block p-4 text-white font-bold">
+            <Link href={"/"} className="block p-4 text-white font-bold">
               <div className="flex space-x-2">
                 <Logo />
               </div>
@@ -47,7 +47,7 @@ export default function BaseMaster({ children }: any) {
           {/* sidebar */}
           <div className="sidebar bg-green-700 text-blue-100 w-64 space-y-6 px-2 py-7 absolute inset-y-0 left-0 transform -translate-x-full transition duration-200 ease-in-out md:relative md:translate-x-0">
             {/* logo */}
-            <Link href={"#"}>
+            <Link href={"/"}>
               <Logo />
             </Link>
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Select, { OptionsOrGroups, SingleValue } from "react-select";
+import Select, { SingleValue } from "react-select";
 import { ClipLoader } from "react-spinners";
 import BaseMaster from "..";
 import TituloDashboard from "../../components/dashboard/Titulo";

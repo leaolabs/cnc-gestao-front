@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import Base from "../../..";
+import BaseMaster from "../../..";
 import ILocalidade from "../../../../model/ILocalidade";
 import ITipoDiocese from "../../../../model/ITipoDiocese";
 import ITipoLocal from "../../../../model/ITipoLocal";
@@ -54,50 +54,27 @@ export default function CidadeId() {
   if (!tipoDioceses) return <ClipLoader />;
 
   return (
-    <Base>
-      <div className="row">
+    <BaseMaster>
+      <div className="">
         <h2>Cidade: {nomeCidade}</h2>
         {localidades
           .filter((l) => l.id_cidade === idCidade)
           .map((localidade) => (
             <div
               key={`localidade-card-${localidade.id_localidade}`}
-              className="col"
+              className=""
             >
-              <div className="card" style={{ width: "18rem" }}>
-                {/* <img src="" className="card-img-top" alt="Catedral Franca" /> */}
-                <div className="card-body">
-                  <h5 className="card-title">{localidade.no_localidade}</h5>
-                  <p className="card-text">{localidade.tx_observacao}</p>
-                </div>
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item">
-                    {localidade.co_localidade}
-                  </li>
-                  <li className="list-group-item">
-                    Diocese: {localidade.id_diocese}
-                  </li>
-                  <li className="list-group-item">
-                    Tipo:{" "}
-                    {tipoLocais
-                      ?.filter(
-                        (l) => l.id_tipo_local === localidade.id_tipo_local
-                      )
-                      .map((local) => local.no_tipo_local)}
-                  </li>
-                </ul>
-                <div className="card-body">
-                  <a href="#" className="card-link">
-                    Card link
-                  </a>
-                  <a href="#" className="card-link">
-                    Another link
-                  </a>
-                </div>
-              </div>
+              {localidade.no_localidade}
+              {localidade.tx_observacao}
+              {localidade.co_localidade}
+              Diocese: {localidade.id_diocese}
+              Tipo:{" "}
+              {tipoLocais
+                ?.filter((l) => l.id_tipo_local === localidade.id_tipo_local)
+                .map((local) => local.no_tipo_local)}
             </div>
           ))}
       </div>
-    </Base>
+    </BaseMaster>
   );
 }

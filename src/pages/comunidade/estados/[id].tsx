@@ -30,19 +30,18 @@ export default function EstadoId() {
   return (
     <BaseMaster>
       <TituloDashboard
-        titulo={`Comunidades de ${nomeEstado}`}
-        subTitulo={`Irmãos`}
+        titulo={`${nomeEstado}`}
+        subTitulo={`Lista de comunidades`}
       />
 
-      <div className="">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
         {cidades
           .filter((c) => c.id_estado === idEstado)
           .map((cidade) => (
-            <div key={`table-tr-cidade-${cidade.id_cidade}`}>
-              <div>{cidade.id_cidade}</div>
-              <div>{cidade.no_cidade}</div>
-              <div>123</div>
-              <div>39829</div>
+            <div
+              key={`table-tr-cidade-${cidade.id_cidade}`}
+              className="bg-pink-300 hover:bg-pink-400 p-2 rounded-lg"
+            >
               <div>
                 <Link
                   href={{
@@ -53,7 +52,9 @@ export default function EstadoId() {
                     },
                   }}
                 >
-                  mais detalhes
+                  <div className="flex text-sm font-light hover:font-bold">
+                    <div className="">{cidade.no_cidade}</div>
+                  </div>
                 </Link>
               </div>
             </div>

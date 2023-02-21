@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Select, { OptionsOrGroups } from "react-select";
+import Select, { OptionsOrGroups, SingleValue } from "react-select";
 import { ClipLoader } from "react-spinners";
 import BaseMaster from "..";
 import TituloDashboard from "../../components/dashboard/Titulo";
@@ -44,9 +44,7 @@ export default function Comunidade(): JSX.Element {
   if (!paises) return <ClipLoader />;
   if (!estados) return <ClipLoader />;
 
-  let optionsPaises:
-    | OptionsOrGroups<{ value: number; label: string }, any>
-    | undefined = [];
+  let optionsPaises: any[] = []
 
   paises.map((p) => {
     optionsPaises?.push({
@@ -55,8 +53,8 @@ export default function Comunidade(): JSX.Element {
     });
   });
 
-  function onChangeSelectPais(option: { value: number; label: string }): void {
-    const paisSelecionado = paises?.find((p) => p.id_pais === option.value);
+  function onChangeSelectPais(option: SingleValue<{ value: number; label: string }>): void {
+    const paisSelecionado = paises?.find((p) => p.id_pais === option?.value);
     if (paisSelecionado) setPais(paisSelecionado);
   }
 
@@ -69,7 +67,7 @@ export default function Comunidade(): JSX.Element {
 
       <Select
         className="mt-2"
-        onChange={(op) => onChangeSelectPais(op)}
+        onChange={(op) => onChangeSelectPais((op))}
         options={optionsPaises}
         defaultValue={{ value: 1, label: "Brasil" }}
         placeholder="Selecione um pais"

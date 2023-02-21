@@ -15,6 +15,11 @@ export default function CidadeId() {
   const router = useRouter();
   const { id, nomeCidade } = router.query;
 
+  let idCidade = 0;
+  if (typeof id != "undefined") {
+    idCidade = +id;
+  }
+
   const { localidadesData, isLoadingLocalidade, isErrorLocalidade } =
     LocalidadesData();
   const [localidades, setLocalidades] = useState<ILocalidade[]>();
@@ -53,7 +58,7 @@ export default function CidadeId() {
       <div className="row">
         <h2>Cidade: {nomeCidade}</h2>
         {localidades
-          .filter((l) => l.id_cidade === +id)
+          .filter((l) => l.id_cidade === idCidade)
           .map((localidade) => (
             <div
               key={`localidade-card-${localidade.id_localidade}`}

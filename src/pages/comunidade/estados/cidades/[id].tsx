@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import BaseMaster from "../../..";
+import TituloDashboard from "../../../../components/dashboard/Titulo";
 import ILocalidade from "../../../../model/ILocalidade";
 import ITipoDiocese from "../../../../model/ITipoDiocese";
 import ITipoLocal from "../../../../model/ITipoLocal";
@@ -53,21 +54,26 @@ export default function CidadeId() {
   if (!localidades) return <ClipLoader />;
   if (!tipoDioceses) return <ClipLoader />;
 
+
   return (
     <BaseMaster>
-      <div className="">
-        <h2>Cidade: {nomeCidade}</h2>
+      <TituloDashboard titulo={`${nomeCidade}`} subTitulo={`Paróquias: ${localidades.filter((l) => l.id_cidade === idCidade).length}`} />
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4">
         {localidades
           .filter((l) => l.id_cidade === idCidade)
           .map((localidade) => (
             <div
               key={`localidade-card-${localidade.id_localidade}`}
-              className=""
+              className="bg-cyan-400 border border-red-500 font-light rounded-lg text-base"
             >
               {localidade.no_localidade}
+              <br />
               {localidade.tx_observacao}
+              <br />
               {localidade.co_localidade}
+              <br />
               Diocese: {localidade.id_diocese}
+              <br />
               Tipo:{" "}
               {tipoLocais
                 ?.filter((l) => l.id_tipo_local === localidade.id_tipo_local)

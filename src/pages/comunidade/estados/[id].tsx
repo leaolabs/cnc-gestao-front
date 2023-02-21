@@ -5,7 +5,8 @@ import { ClipLoader } from "react-spinners";
 import BaseMaster from "../..";
 import TituloDashboard from "../../../components/dashboard/Titulo";
 import ICidade from "../../../model/ICidade";
-import { CidadesData } from "../../api/cncApi";
+import ILocalidade from "../../../model/ILocalidade";
+import { CidadesData, LocalidadesData } from "../../api/cncApi";
 
 export default function EstadoId() {
   const router = useRouter();
@@ -25,7 +26,36 @@ export default function EstadoId() {
     [cidadesData]
   );
 
+  const { localidadesData, isLoadingLocalidade, isErrorLocalidade } =
+    LocalidadesData();
+  const [localidades, setLocalidades] = useState<ILocalidade[]>();
+  useEffect(
+    function persistirLocalidades() {
+      if (localidadesData) setLocalidades(localidadesData.data);
+    },
+    [localidadesData]
+  );
+
   if (!cidades) return <ClipLoader />;
+
+  let contemParoquia: string = "";
+
+  function renderizar(cidade: ICidade) {
+    localidades?.filter((l) => l.id_cidade === cidade.id_cidade).length === 0
+      ? (contemParoquia = "bg-red-300 hover:bg-red-400")
+      : (contemParoquia = "bg-green-300 hover:bg-green-400");
+
+    return (
+      <div
+        key={`cidade-${cidade.id_cidade}`}
+        className={`${contemParoquia} p-2 rounded-lg`}
+      >
+        <div className="flex text-sm font-light hover:font-bold">
+          <div className="">{cidade.no_cidade}</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <BaseMaster>
@@ -38,26 +68,17 @@ export default function EstadoId() {
         {cidades
           .filter((c) => c.id_estado === idEstado)
           .map((cidade) => (
-            <div
-              key={`table-tr-cidade-${cidade.id_cidade}`}
-              className="bg-pink-300 hover:bg-pink-400 p-2 rounded-lg"
+            <Link
+              href={{
+                pathname: "cidades/[id]",
+                query: {
+                  id: cidade.id_cidade,
+                  nomeCidade: cidade.no_cidade,
+                },
+              }}
             >
-              <div>
-                <Link
-                  href={{
-                    pathname: "cidades/[id]",
-                    query: {
-                      id: cidade.id_cidade,
-                      nomeCidade: cidade.no_cidade,
-                    },
-                  }}
-                >
-                  <div className="flex text-sm font-light hover:font-bold">
-                    <div className="">{cidade.no_cidade}</div>
-                  </div>
-                </Link>
-              </div>
-            </div>
+              {renderizar(cidade)}
+            </Link>
           ))}
       </div>
     </BaseMaster>

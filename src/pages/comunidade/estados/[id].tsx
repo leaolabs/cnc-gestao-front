@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { ClipLoader } from "react-spinners";
 import BaseMaster from "../..";
 import TituloDashboard from "../../../components/dashboard/Titulo";
 import ICidade from "../../../model/ICidade";
 import ILocalidade from "../../../model/ILocalidade";
 import { CidadesData, LocalidadesData } from "../../api/cncApi";
+import Carregando from "../../carregando";
 
 export default function EstadoId() {
   const router = useRouter();
@@ -36,7 +36,7 @@ export default function EstadoId() {
     [localidadesData]
   );
 
-  if (!cidades) return <ClipLoader />;
+  if (!cidades) return <Carregando />
 
   let contemParoquia: string = "";
 

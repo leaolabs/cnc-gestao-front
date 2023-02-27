@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { ClipLoader } from "react-spinners";
 import BaseMaster from "../../..";
 import TituloDashboard from "../../../../components/dashboard/Titulo";
 import ILocalidade from "../../../../model/ILocalidade";
@@ -11,6 +10,7 @@ import {
   TipoDiocesesData,
   TipoLocaisData,
 } from "../../../api/cncApi";
+import Carregando from "../../../carregando";
 
 export default function CidadeId() {
   const router = useRouter();
@@ -51,13 +51,17 @@ export default function CidadeId() {
     [tipoLocaisData]
   );
 
-  if (!localidades) return <ClipLoader />;
-  if (!tipoDioceses) return <ClipLoader />;
-
+  if (!localidades) return <Carregando />;
+  if (!tipoDioceses) return <Carregando />;
 
   return (
     <BaseMaster>
-      <TituloDashboard titulo={`${nomeCidade}`} subTitulo={`Paróquias: ${localidades.filter((l) => l.id_cidade === idCidade).length}`} />
+      <TituloDashboard
+        titulo={`${nomeCidade}`}
+        subTitulo={`Paróquias: ${
+          localidades.filter((l) => l.id_cidade === idCidade).length
+        }`}
+      />
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4">
         {localidades
           .filter((l) => l.id_cidade === idCidade)

@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Select, { SingleValue } from "react-select";
-import { ClipLoader } from "react-spinners";
 import BaseMaster from "..";
 import TituloDashboard from "../../components/dashboard/Titulo";
 import IEstado from "../../model/IEstado";
 import IPais from "../../model/IPais";
 import { PaisesData, EstadosData } from "../api/cncApi";
+import Carregando from "../carregando";
 
 const initialState: IPais = {
   id_pais: 1,
@@ -20,6 +20,7 @@ export default function Comunidade(): JSX.Element {
   const [paises, setPaises] = useState<IPais[]>();
   const [pais, setPais] = useState<IPais>(initialState);
   const [estados, setEstados] = useState<IEstado[]>();
+
 
   const { paisesData, isLoadingPais, isErrorPais } = PaisesData();
   useEffect(
@@ -41,10 +42,10 @@ export default function Comunidade(): JSX.Element {
     [estadosData]
   );
 
-  if (!paises) return <ClipLoader />;
-  if (!estados) return <ClipLoader />;
+  if (!paises) return <Carregando />;
+  if (!estados) return <Carregando />;
 
-  let optionsPaises: any[] = []
+  let optionsPaises: any[] = [];
 
   paises.map((p) => {
     optionsPaises?.push({
@@ -53,7 +54,9 @@ export default function Comunidade(): JSX.Element {
     });
   });
 
-  function onChangeSelectPais(option: SingleValue<{ value: number; label: string }>): void {
+  function onChangeSelectPais(
+    option: SingleValue<{ value: number; label: string }>
+  ): void {
     const paisSelecionado = paises?.find((p) => p.id_pais === option?.value);
     if (paisSelecionado) setPais(paisSelecionado);
   }
@@ -67,7 +70,7 @@ export default function Comunidade(): JSX.Element {
 
       <Select
         className="mt-2"
-        onChange={(op) => onChangeSelectPais((op))}
+        onChange={(op) => onChangeSelectPais(op)}
         options={optionsPaises}
         defaultValue={{ value: 1, label: "Brasil" }}
         placeholder="Selecione um pais"

@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Script from "next/script";
 import Logo from "../components/dashboard/Logo";
+import { IconeComunidade, IconeEquipe, IconeHome, IconePessoas, IconeRelatorio } from "../components/nav/Icones";
 import Nav from "../components/nav/Nav";
 
 export default function BaseMaster({ children }: any) {
@@ -53,10 +54,11 @@ export default function BaseMaster({ children }: any) {
 
             {/* nav */}
             <nav>
-              <Nav descricao="Home" url="/"></Nav>
-              <Nav descricao="Pessoas" url="/pessoa"></Nav>
-              <Nav descricao="Equipe" url="/equipe"></Nav>
-              <Nav descricao="Comunidade" url="/comunidade"></Nav>
+              <Nav descricao="Home" url="/" icone={IconeHome}></Nav>
+              <Nav descricao="Pessoas" url="/pessoa" icone={IconePessoas}></Nav>
+              <Nav descricao="Equipe" url="/equipe" icone={IconeEquipe}></Nav>
+              <Nav descricao="Comunidade" url="/comunidade" icone={IconeComunidade}></Nav>
+              <Nav descricao="Relatorios" url="/" icone={IconeRelatorio}></Nav>
             </nav>
           </div>
 

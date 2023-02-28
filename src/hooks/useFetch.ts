@@ -1,9 +1,10 @@
 import useSWR from "swr";
 
 const BASE_URL: string = "https://apicncbrasil.cn.org.br/api";
+const LOCAL_URL: string = "http://localhost:3000"
 
 async function getToken(): Promise<any> {
-  const response = await fetch("https://cnc-gestao-front.vercel.app/api/cnc");
+  const response = await fetch(`${LOCAL_URL}/api/cnc`);
   const data = await response.json();
   return data.token;
 }

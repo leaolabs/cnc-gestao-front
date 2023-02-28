@@ -11,18 +11,22 @@ export default async function token(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const params: RequestInit = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: process.env.CNC_USER_EMAIL,
-      password: process.env.CNC_USER_PASSWORD,
-    }),
-  };
-  const response = await fetch(`${BASE_URL}/auth/login`, params);
-  const data = await response.json();
-
-  res.status(200).json({ token: `Bearer ${data.access_token}` });
+  try {
+    const params: RequestInit = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: process.env.CNC_USER_EMAIL,
+        password: process.env.CNC_USER_PASSWORD,
+      }),
+    };
+    const response = await fetch(`${BASE_URL}/auth/login`, params);
+    const data = await response.json();
+    res.status(200).json({ token: `Bearer ${data.access_token}` });
+  } catch {
+    console.log("rionaldo");
+    res.status(500).json({ token: "rolou um erro" });
+  }
 }

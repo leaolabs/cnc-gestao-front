@@ -26,10 +26,9 @@ export default async function token(
     const data = await response.json();
     res.status(200).json({ token: `Bearer ${data.access_token}` });
   } catch (e) {
-    if (e) {
-      res.status(500).json({ token: String(e) });
-    } else {
-      res.status(500).json({ token: "nao sei qual erro" });
-    }
+    let frase = String(e);
+
+    frase += " " + process.env.CNC_USER_EMAIL + " final";
+    res.status(500).json({ token: frase });
   }
 }

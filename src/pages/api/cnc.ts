@@ -25,8 +25,11 @@ export default async function token(
     const response = await fetch(`${BASE_URL}/auth/login`, params);
     const data = await response.json();
     res.status(200).json({ token: `Bearer ${data.access_token}` });
-  } catch {
-    console.log("rionaldo");
-    res.status(500).json({ token: "rolou um erro" });
+  } catch (e) {
+    if (e) {
+      res.status(500).json({ token: String(e) });
+    } else {
+      res.status(500).json({ token: "nao sei qual erro" });
+    }
   }
 }

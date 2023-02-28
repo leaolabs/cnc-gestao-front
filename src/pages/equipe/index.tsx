@@ -8,8 +8,6 @@ export default function Equipe() {
 
   if (!data) return <Carregando />;
 
-  console.log(data[3]);
-
   return (
     <BaseMaster>
       {data.map((estado) => (

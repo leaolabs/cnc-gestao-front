@@ -14,7 +14,6 @@ export function useFetchCncApi<Data = any, Error = any>(url: string) {
 
     if (response.status === 401) {
       const token = await getToken();
-      console.log(token);
       const params: RequestInit = {
         method: "GET",
         headers: {

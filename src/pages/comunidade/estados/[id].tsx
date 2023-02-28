@@ -69,6 +69,7 @@ export default function EstadoId() {
           .filter((c) => c.id_estado === idEstado)
           .map((cidade) => (
             <Link
+              key={cidade.id_cidade}
               href={{
                 pathname: "cidades/[id]",
                 query: {

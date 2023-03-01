@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
-  ronaldinho: string;
+  token: string;
 };
 
 const BASE_URL: string = "https://apicncbrasil.cn.org.br/api";
@@ -26,9 +26,8 @@ export default async function token(
     };
     const response = await fetch(`${BASE_URL}/auth/login`, params);
     const data = await response.json();
-    console.log(data);
-    res.status(200).json({ ronaldinho: `Bearer ${data.access_token}` });
+    res.status(200).json({ token: `Bearer ${data.access_token}` });
   } catch (e) {
-    res.status(500).json({ ronaldinho: String(e) });
+    res.status(500).json({ token: String(e) });
   }
 }

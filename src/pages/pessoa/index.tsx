@@ -1,19 +1,68 @@
+import Image from "next/image";
 import BaseMaster from "..";
-import { useFetchCncApi } from "../../hooks/useFetch";
+import TituloDashboard from "../../components/dashboard/Titulo";
 import IPessoa from "../../model/IPessoa";
 import Carregando from "../carregando";
+import foto1 from "public/img/sem-foto/1.jpg";
+import foto2 from "public/img/sem-foto/2.jpg";
+import foto3 from "public/img/sem-foto/3.jpg";
+import foto4 from "public/img/sem-foto/4.jpg";
+import foto5 from "public/img/sem-foto/5.jpg";
+import foto6 from "public/img/sem-foto/6.jpg";
+import foto7 from "public/img/sem-foto/7.jpg";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { PessoasData } from "../api/cncApi";
 
 export default function Pessoa() {
-  const { data } = useFetchCncApi<IPessoa[]>("pessoas");
+  const [pessoas, setPessoas] = useState<IPessoa[]>();
+  const { isErrorPessoas, isLoadingPessoas, pessoasData } = PessoasData();
 
-  if (!data) return <Carregando />;
+  useEffect(() => {
+    if (pessoasData) {
+      setPessoas(pessoasData.data);
+    }
+  }, [pessoasData]);
+
+  if (!pessoas) return <Carregando />;
+
+  function randomFoto() {
+    const fotos = [foto1, foto2, foto3, foto4, foto5, foto6, foto7];
+    return fotos[Math.floor(Math.random() * fotos.length)];
+  }
 
   return (
     <BaseMaster>
-      <h1>Pagina pessoa</h1>
-      {data.map((pessoa) => (
-        <div key={pessoa.id_pessoa}>{pessoa.no_pessoa}</div>
-      ))}
+      <TituloDashboard subTitulo="Irmãos" titulo="Pessoas" />
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2">
+        {pessoas.map((pessoa: IPessoa) => (
+          <div>
+            <Link
+              key={pessoa.id_pessoa}
+              href={{
+                pathname: "pessoa/[id]",
+                query: {
+                  id: pessoa.id_pessoa,
+                  nomePessoa: pessoa.no_pessoa,
+                },
+              }}
+            >
+              <div key={pessoa.id_pessoa} className="">
+                <div className="flex bg-red-300 items-center m-2 p-2">
+                  <Image
+                    src={randomFoto()}
+                    alt="sem foto"
+                    width={384}
+                    height={512}
+                    className="w-24 h-24"
+                  />
+                  <h4>{pessoa.no_pessoa}</h4>
+                </div>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
     </BaseMaster>
   );
 }

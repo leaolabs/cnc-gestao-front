@@ -19,24 +19,18 @@ export default function EstadoId() {
 
   const { cidadesData, isLoadingCidade, isErrorCidade } = CidadesData();
   const [cidades, setCidades] = useState<ICidade[]>();
-  useEffect(
-    function persistirCidades() {
-      if (cidadesData) setCidades(cidadesData.data);
-    },
-    [cidadesData]
-  );
+  useEffect(() => {
+    if (cidadesData) setCidades(cidadesData.data);
+  }, [cidadesData]);
 
   const { localidadesData, isLoadingLocalidade, isErrorLocalidade } =
     LocalidadesData();
   const [localidades, setLocalidades] = useState<ILocalidade[]>();
-  useEffect(
-    function persistirLocalidades() {
-      if (localidadesData) setLocalidades(localidadesData.data);
-    },
-    [localidadesData]
-  );
+  useEffect(() => {
+    if (localidadesData) setLocalidades(localidadesData.data);
+  }, [localidadesData]);
 
-  if (!cidades) return <Carregando />
+  if (!cidades) return <Carregando />;
 
   let contemParoquia: string = "";
 

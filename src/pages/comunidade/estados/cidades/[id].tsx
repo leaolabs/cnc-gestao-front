@@ -24,32 +24,23 @@ export default function CidadeId() {
   const { localidadesData, isLoadingLocalidade, isErrorLocalidade } =
     LocalidadesData();
   const [localidades, setLocalidades] = useState<ILocalidade[]>();
-  useEffect(
-    function persistirLocalidades() {
-      if (localidadesData) setLocalidades(localidadesData.data);
-    },
-    [localidadesData]
-  );
+  useEffect(() => {
+    if (localidadesData) setLocalidades(localidadesData.data);
+  }, [localidadesData]);
 
   const { tipoDiocesesData, isLoadingTipoDioceses, isErrorTipoDioceses } =
     TipoDiocesesData();
   const [tipoDioceses, setTipoDioceses] = useState<ITipoDiocese[]>();
-  useEffect(
-    function persistirTipoDioceses() {
-      if (tipoDiocesesData) setTipoDioceses(tipoDiocesesData.data);
-    },
-    [tipoDiocesesData]
-  );
+  useEffect(() => {
+    if (tipoDiocesesData) setTipoDioceses(tipoDiocesesData.data);
+  }, [tipoDiocesesData]);
 
   const { tipoLocaisData, isLoadingTipoLocais, isErrorTipoLocais } =
     TipoLocaisData();
   const [tipoLocais, setTipoLocais] = useState<ITipoLocal[]>();
-  useEffect(
-    function persistTipoLocais() {
-      if (tipoLocaisData) setTipoLocais(tipoLocaisData.data);
-    },
-    [tipoLocaisData]
-  );
+  useEffect(() => {
+    if (tipoLocaisData) setTipoLocais(tipoLocaisData.data);
+  }, [tipoLocaisData]);
 
   if (!localidades) return <Carregando />;
   if (!tipoDioceses) return <Carregando />;

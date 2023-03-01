@@ -21,16 +21,12 @@ export default function Comunidade(): JSX.Element {
   const [pais, setPais] = useState<IPais>(initialState);
   const [estados, setEstados] = useState<IEstado[]>();
 
-
   const { paisesData, isLoadingPais, isErrorPais } = PaisesData();
-  useEffect(
-    function persistPaises() {
-      if (paisesData) {
-        setPaises(paisesData.data);
-      }
-    },
-    [paisesData]
-  );
+  useEffect(() => {
+    if (paisesData) {
+      setPaises(paisesData.data);
+    }
+  }, [paisesData]);
 
   const { estadosData, isLoadingEstado, isErrorEstado } = EstadosData();
   useEffect(

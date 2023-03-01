@@ -1,12 +1,12 @@
 import useSWR from "swr";
 
-const baseUrl: string = "https://apicncbrasil.cn.org.br/api";
+const BASE_URL: string = "https://apicncbrasil.cn.org.br/api";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 
 export function ComunidadesData() {
-  const { data, error } = useSWR(`${baseUrl}/comunidades`, fetcher);
+  const { data, error } = useSWR(`${BASE_URL}/comunidades`, fetcher);
 
   return {
     comunidadesData: data,
@@ -16,7 +16,7 @@ export function ComunidadesData() {
 }
 
 export function LocalidadesData() {
-  const { data, error } = useSWR(`${baseUrl}/localidades`, fetcher);
+  const { data, error } = useSWR(`${BASE_URL}/localidades`, fetcher);
 
   return {
     localidadesData: data,
@@ -26,7 +26,7 @@ export function LocalidadesData() {
 }
 
 export function CidadesData() {
-  const { data, error } = useSWR(`${baseUrl}/cidades`, fetcher);
+  const { data, error } = useSWR(`${BASE_URL}/cidades`, fetcher);
 
   return {
     cidadesData: data,
@@ -36,7 +36,7 @@ export function CidadesData() {
 }
 
 export function EstadosData() {
-  const { data, error } = useSWR(`${baseUrl}/estados`, fetcher);
+  const { data, error } = useSWR(`${BASE_URL}/estados`, fetcher);
 
   return {
     estadosData: data,
@@ -46,7 +46,7 @@ export function EstadosData() {
 }
 
 export function PaisesData() {
-  const { data, error } = useSWR(`${baseUrl}/paises`, fetcher);
+  const { data, error } = useSWR(`${BASE_URL}/paises`, fetcher);
 
   return {
     paisesData: data,
@@ -56,7 +56,7 @@ export function PaisesData() {
 }
 
 export function TipoDiocesesData() {
-  const { data, error } = useSWR(`${baseUrl}/tipo_dioceses`, fetcher);
+  const { data, error } = useSWR(`${BASE_URL}/tipo_dioceses`, fetcher);
 
   return {
     tipoDiocesesData: data,
@@ -66,7 +66,7 @@ export function TipoDiocesesData() {
 }
 
 export function TipoLocaisData() {
-  const { data, error } = useSWR(`${baseUrl}/tipo_locais`, fetcher);
+  const { data, error } = useSWR(`${BASE_URL}/tipo_locais`, fetcher);
 
   return {
     tipoLocaisData: data,

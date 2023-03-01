@@ -16,6 +16,8 @@ export default async function token(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "User-Agent": "*",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         email: process.env.CNC_USER_EMAIL,

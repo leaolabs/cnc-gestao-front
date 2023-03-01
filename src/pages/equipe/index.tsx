@@ -7,8 +7,7 @@ import Carregando from "../carregando";
 export default function Equipe() {
   const [tipoEquipes, setTipoEquipes] = useState<ITipoEquipe[]>();
 
-  const { tipoEquipesData, isErrorTipoEquipes, isLoadingTipoEquipes } =
-    TipoEquipesData();
+  const { tipoEquipesData } = TipoEquipesData();
 
   useEffect(
     function persistirTipoEquipes() {

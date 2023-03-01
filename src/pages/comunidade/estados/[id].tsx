@@ -17,13 +17,13 @@ export default function EstadoId() {
     idEstado = +id;
   }
 
-  const { cidadesData, isLoadingCidade, isErrorCidade } = CidadesData();
+  const { cidadesData } = CidadesData();
   const [cidades, setCidades] = useState<ICidade[]>();
   useEffect(() => {
     if (cidadesData) setCidades(cidadesData.data);
   }, [cidadesData]);
 
-  const { localidadesData, isLoadingLocalidade, isErrorLocalidade } =
+  const { localidadesData } =
     LocalidadesData();
   const [localidades, setLocalidades] = useState<ILocalidade[]>();
   useEffect(() => {

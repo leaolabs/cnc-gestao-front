@@ -21,22 +21,19 @@ export default function CidadeId() {
     idCidade = +id;
   }
 
-  const { localidadesData, isLoadingLocalidade, isErrorLocalidade } =
-    LocalidadesData();
+  const { localidadesData } = LocalidadesData();
   const [localidades, setLocalidades] = useState<ILocalidade[]>();
   useEffect(() => {
     if (localidadesData) setLocalidades(localidadesData.data);
   }, [localidadesData]);
 
-  const { tipoDiocesesData, isLoadingTipoDioceses, isErrorTipoDioceses } =
-    TipoDiocesesData();
+  const { tipoDiocesesData } = TipoDiocesesData();
   const [tipoDioceses, setTipoDioceses] = useState<ITipoDiocese[]>();
   useEffect(() => {
     if (tipoDiocesesData) setTipoDioceses(tipoDiocesesData.data);
   }, [tipoDiocesesData]);
 
-  const { tipoLocaisData, isLoadingTipoLocais, isErrorTipoLocais } =
-    TipoLocaisData();
+  const { tipoLocaisData } = TipoLocaisData();
   const [tipoLocais, setTipoLocais] = useState<ITipoLocal[]>();
   useEffect(() => {
     if (tipoLocaisData) setTipoLocais(tipoLocaisData.data);

@@ -1,4 +1,5 @@
 import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 const URL_CNC_BRASIL: string = "https://apicncbrasil.cn.org.br/api";
 const LOCAL_URL: string = "http://localhost:3000";
@@ -35,7 +36,7 @@ export function ComunidadesData() {
 }
 
 export function LocalidadesData() {
-  const { data, error } = useSWR(`${URL_CNC_BRASIL}/localidades`, fetcher);
+  const { data, error } = useSWRImmutable(`${URL_CNC_BRASIL}/localidades`, fetcher);
 
   return {
     localidadesData: data,
@@ -45,7 +46,7 @@ export function LocalidadesData() {
 }
 
 export function CidadesData() {
-  const { data, error } = useSWR(`${URL_CNC_BRASIL}/cidades`, fetcher);
+  const { data, error } = useSWRImmutable(`${URL_CNC_BRASIL}/cidades`, fetcher);
 
   return {
     cidadesData: data,
@@ -55,7 +56,7 @@ export function CidadesData() {
 }
 
 export function EstadosData() {
-  const { data, error } = useSWR(`${URL_CNC_BRASIL}/estados`, fetcher);
+  const { data, error } = useSWRImmutable(`${URL_CNC_BRASIL}/estados`, fetcher);
 
   return {
     estadosData: data,
@@ -65,7 +66,7 @@ export function EstadosData() {
 }
 
 export function PaisesData() {
-  const { data, error } = useSWR(`${URL_CNC_BRASIL}/paises`, fetcher);
+  const { data, error } = useSWRImmutable(`${URL_CNC_BRASIL}/paises`, fetcher);
 
   return {
     paisesData: data,
@@ -75,7 +76,7 @@ export function PaisesData() {
 }
 
 export function TipoDiocesesData() {
-  const { data, error } = useSWR(`${URL_CNC_BRASIL}/tipo_dioceses`, fetcher);
+  const { data, error } = useSWRImmutable(`${URL_CNC_BRASIL}/tipo_dioceses`, fetcher);
 
   return {
     tipoDiocesesData: data,
@@ -85,7 +86,7 @@ export function TipoDiocesesData() {
 }
 
 export function TipoLocaisData() {
-  const { data, error } = useSWR(`${URL_CNC_BRASIL}/tipo_locais`, fetcher);
+  const { data, error } = useSWRImmutable(`${URL_CNC_BRASIL}/tipo_locais`, fetcher);
 
   return {
     tipoLocaisData: data,
@@ -95,13 +96,13 @@ export function TipoLocaisData() {
 }
 
 export function TipoEquipesData() {
-  const { data, error } = useSWR(
+  const { data, error, isLoading } = useSWRImmutable(
     `${URL_CNC_BRASIL}/tipo_equipes`,
-    fetcherWithToken
+    fetcher
   );
   return {
     tipoEquipesData: data,
-    isLoadingTipoEquipes: !error && !data,
+    isLoadingTipoEquipes: isLoading,
     isErrorTipoEquipes: error,
   };
 }
@@ -112,5 +113,17 @@ export function PessoasData() {
     pessoasData: data,
     isLoadingPessoas: !error && !data,
     isErrorPessoas: error,
+  };
+}
+
+export function PessoaByIdData(id: number) {
+  const { data, error } = useSWR(
+    `${URL_CNC_BRASIL}/pessoas/${id}`,
+    fetcherWithToken
+  );
+  return {
+    pessoaByIdData: data,
+    isLoadingPessoaById: !error && !data,
+    isErrorPessoaById: error,
   };
 }

@@ -3,36 +3,35 @@ import BaseMaster from "..";
 import TituloDashboard from "../../components/dashboard/Titulo";
 import IPessoa from "../../model/IPessoa";
 import Carregando from "../carregando";
-import foto1 from "public/img/sem-foto/1.jpg";
-import foto2 from "public/img/sem-foto/2.jpg";
-import foto3 from "public/img/sem-foto/3.jpg";
-import foto4 from "public/img/sem-foto/4.jpg";
-import foto5 from "public/img/sem-foto/5.jpg";
-import foto6 from "public/img/sem-foto/6.jpg";
-import foto7 from "public/img/sem-foto/7.jpg";
+import pessoaSemFoto from "public/img/sem-foto.jpg";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { PessoasData } from "../api/cncApi";
+import { LocalidadesData, PessoasData } from "../api/cncApi";
 import utils from "../../utils/utils";
+import ILocalidade from "../../model/ILocalidade";
 
 export default function Pessoa() {
   const [search, setSearch] = useState("");
   const [pessoas, setPessoas] = useState<IPessoa[]>();
+  const [localidades, setLocalidades] = useState<ILocalidade[]>();
 
   const { pessoasData } = PessoasData();
+  const { localidadesData } = LocalidadesData();
+  useEffect(() => {
+    if (localidadesData) setLocalidades(localidadesData.data);
+  }, [localidadesData]);
 
   useEffect(() => {
-    if (pessoasData) {
-      setPessoas(pessoasData.data);
-    }
+    if (pessoasData) setPessoas(pessoasData.data);
   }, [pessoasData]);
 
   if (!pessoas) return <Carregando />;
+  if (!localidades) return <Carregando />;
 
   const pessoasFiltradas =
     search.length > 0
-      ? pessoas.filter((pessoa) => {
-          const nome = utils.removerAcento(pessoa.no_pessoa).toLowerCase();
+      ? pessoas.filter((p) => {
+          const nome = utils.removerAcento(p.no_pessoa).toLowerCase();
           const nomePesquisa = utils.removerAcento(search).toLowerCase();
           return nome.includes(nomePesquisa);
         })
@@ -42,55 +41,86 @@ export default function Pessoa() {
     <BaseMaster>
       <TituloDashboard subTitulo="Irmãos" titulo="Pessoas" />
 
-      <div className="bg-lime-600 p-4 mt-4">
-        <input
-          type="text"
-          name="search"
-          placeholder="Nome da pessoa ..."
-          onChange={(e) => setSearch(e.target.value)}
-          value={search}
-          className="rounded-md w-full sm:max-w-max p-2 text-gray-600 font-light"
-        />
+      <div className="bg-lime-300 p-2 mt-3 rounded-md">
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            {renderIconePessoa()}
+          </div>
+          <input
+            type="text"
+            name="search"
+            placeholder="Nome da pessoa ..."
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg hover:bg-lime-100 focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+          />
+        </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2">
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {search.length > 0
           ? pessoasFiltradas
-              .map((pessoa: IPessoa) => renderCardPessoa(pessoa))
-              .slice(0, 20)
+              .map((p: IPessoa) => renderCardPessoa(p, localidades))
+              .slice(0, 24)
           : pessoas
-              .map((pessoa: IPessoa) => renderCardPessoa(pessoa))
-              .slice(0, 10)}
+              .map((p: IPessoa) => renderCardPessoa(p, localidades))
+              .slice(0, 12)}
       </div>
     </BaseMaster>
   );
 
-  function randomFoto() {
-    const fotos = [foto1, foto2, foto3, foto4, foto5, foto6, foto7];
-    return fotos[Math.floor(Math.random() * fotos.length)];
+  function renderIconePessoa() {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="w-6 h-6 text-gray-500 dark:text-gray-400"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+        />
+      </svg>
+    );
   }
 
-  function renderCardPessoa(pessoa: IPessoa): JSX.Element {
+  function renderCardPessoa(
+    p: IPessoa,
+    localidades: ILocalidade[]
+  ): JSX.Element {
     return (
-      <div key={pessoa.id_pessoa}>
+      <div key={p.id_pessoa}>
         <Link
-          key={pessoa.id_pessoa}
+          key={p.id_pessoa}
           href={{
             pathname: "pessoa/[id]",
             query: {
-              id: pessoa.id_pessoa,
-              nomePessoa: pessoa.no_pessoa,
+              id: p.id_pessoa,
+              nomePessoa: p.no_pessoa,
             },
           }}
         >
-          <div key={pessoa.id_pessoa} className="">
-            <div className="flex bg-red-300 items-center m-2 p-2">
+          <div key={p.id_pessoa} className="">
+            <div className="flex bg-lime-200 items-center m-2 p-2 rounded-md gap-3">
               <Image
-                src={randomFoto()}
+                src={pessoaSemFoto}
                 alt="sem foto"
                 className="w-24 h-24 rounded-lg"
               />
-              <h4 className="pl-2 font-normal">{pessoa.no_pessoa}</h4>
+              <div>
+                <h4 className="font-normal text-base">{p.no_pessoa}</h4>
+                <h3 className="text-sm font-light">
+                  {localidades
+                    .filter((local) => local.id_localidade === p.id_localidade)
+                    .map((localidade) => (
+                      <h1>{localidade.no_localidade}</h1>
+                    ))}
+                </h3>
+              </div>
             </div>
           </div>
         </Link>

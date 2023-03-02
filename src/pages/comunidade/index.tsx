@@ -38,8 +38,8 @@ export default function Comunidade(): JSX.Element {
     [estadosData]
   );
 
-  if (!paises) return <Carregando />;
-  if (!estados) return <Carregando />;
+  if (!paises) return <Carregando objetoCarregando="Paises" />;
+  if (!estados) return <Carregando objetoCarregando="Estados (UF)" />;
 
   let optionsPaises: any[] = [];
 

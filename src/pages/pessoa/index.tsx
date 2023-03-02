@@ -27,7 +27,7 @@ export default function Pessoa() {
   }, [pessoasData]);
 
   if (isErrorPessoas) return <ErroCarregamento />;
-  if (!pessoas) return <Carregando />;
+  if (!pessoas) return <Carregando objetoCarregando="Pessoas" />;
 
   const pessoasFiltradas =
     search.length > 0
@@ -40,7 +40,7 @@ export default function Pessoa() {
 
   return (
     <BaseMaster>
-      <TituloDashboard subTitulo="Irmãos" titulo="Pessoas" />
+      <TituloDashboard subTitulo={`${pessoas.length} irmãos`} titulo="Pessoas" />
 
       <div className="bg-lime-300 p-2 mt-3 rounded-md">
         <div className="relative">

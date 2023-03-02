@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import BaseMaster from "..";
+import TituloDashboard from "../../components/dashboard/Titulo";
 import IEquipe from "../../model/IEquipe";
 import ITipoEquipe from "../../model/ITipoEquipe";
 import { EquipesData, TipoEquipesData } from "../api/cncApi";
 import Carregando from "../carregando";
+import ErroCarregamento from "../erroCarregamento";
 
 export default function Equipe() {
   const [tipoEquipes, setTipoEquipes] = useState<ITipoEquipe[]>();
   const [equipes, setEquipes] = useState<IEquipe[]>();
 
-  const { tipoEquipesData } = TipoEquipesData();
-  const { equipesData } = EquipesData();
+  const { tipoEquipesData, isErrorTipoEquipes } = TipoEquipesData();
+  const { equipesData, isErrorEquipes } = EquipesData();
 
   useEffect(() => {
     if (tipoEquipesData) {
@@ -24,10 +26,15 @@ export default function Equipe() {
     }
   }, [equipesData]);
 
-  if (!tipoEquipes) return <Carregando />;
+  if (!tipoEquipes) return <Carregando objetoCarregando="Tipo Equipes" />;
+  if (!equipes) return <Carregando objetoCarregando="Equipes" />;
+
+  if (isErrorEquipes) return <ErroCarregamento />;
+  if (isErrorTipoEquipes) return <ErroCarregamento />;
 
   return (
     <BaseMaster>
+      <TituloDashboard titulo="Equipe" subTitulo="Equipes do caminho" />
       {tipoEquipes.map((equipe: ITipoEquipe) => (
         <li key={equipe.id_tipo_equipe}>{equipe.no_tipo_equipe}</li>
       ))}
@@ -35,7 +42,7 @@ export default function Equipe() {
       <br />
 
       {equipes?.map((equipe: IEquipe) => (
-        <li>{equipe.responsavel}</li>
+        <li key={equipe.id_equipe}>{equipe.responsavel}</li>
       ))}
     </BaseMaster>
   );

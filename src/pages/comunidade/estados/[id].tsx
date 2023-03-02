@@ -30,7 +30,7 @@ export default function EstadoId() {
     if (localidadesData) setLocalidades(localidadesData.data);
   }, [localidadesData]);
 
-  if (!cidades) return <Carregando />;
+  if (!cidades) return <Carregando objetoCarregando="Cidades" />;
 
   let contemParoquia: string = "";
 

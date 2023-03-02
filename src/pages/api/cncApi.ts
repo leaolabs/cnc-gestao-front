@@ -36,7 +36,7 @@ export function ComunidadesData() {
 }
 
 export function LocalidadesData() {
-  const { data, error } = useSWRImmutable(`${URL_CNC_BRASIL}/localidades`, fetcher);
+  const { data, error } = useSWR(`${URL_CNC_BRASIL}/localidades`, fetcher);
 
   return {
     localidadesData: data,
@@ -76,7 +76,10 @@ export function PaisesData() {
 }
 
 export function TipoDiocesesData() {
-  const { data, error } = useSWRImmutable(`${URL_CNC_BRASIL}/tipo_dioceses`, fetcher);
+  const { data, error } = useSWRImmutable(
+    `${URL_CNC_BRASIL}/tipo_dioceses`,
+    fetcher
+  );
 
   return {
     tipoDiocesesData: data,
@@ -86,7 +89,10 @@ export function TipoDiocesesData() {
 }
 
 export function TipoLocaisData() {
-  const { data, error } = useSWRImmutable(`${URL_CNC_BRASIL}/tipo_locais`, fetcher);
+  const { data, error } = useSWRImmutable(
+    `${URL_CNC_BRASIL}/tipo_locais`,
+    fetcher
+  );
 
   return {
     tipoLocaisData: data,
@@ -108,9 +114,9 @@ export function TipoEquipesData() {
 }
 
 export function EquipesData() {
-  const { data, error, isLoading } = useSWRImmutable(
+  const { data, error, isLoading } = useSWR(
     `${URL_CNC_BRASIL}/equipes`,
-    fetcher
+    fetcherWithToken
   );
   return {
     equipesData: data,

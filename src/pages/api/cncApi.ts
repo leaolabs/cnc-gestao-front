@@ -36,7 +36,10 @@ export function ComunidadesData() {
 }
 
 export function LocalidadesData() {
-  const { data, error } = useSWR(`${URL_CNC_BRASIL}/localidades`, fetcher);
+  const { data, error } = useSWRImmutable(
+    `${URL_CNC_BRASIL}/localidades`,
+    fetcher
+  );
 
   return {
     localidadesData: data,

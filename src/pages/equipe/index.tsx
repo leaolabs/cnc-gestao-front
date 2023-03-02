@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import BaseMaster from "..";
+import InputPequisa from "../../components/dashboard/InputPesquisa";
 import TituloDashboard from "../../components/dashboard/Titulo";
 import IEquipe from "../../model/IEquipe";
 import ITipoEquipe from "../../model/ITipoEquipe";
+import svgIconePessoa from "../../utils/svg";
 import { EquipesData, TipoEquipesData } from "../api/cncApi";
 import Carregando from "../carregando";
 import ErroCarregamento from "../erroCarregamento";
 
 export default function Equipe() {
+  const [search, setSearch] = useState("");
   const [tipoEquipes, setTipoEquipes] = useState<ITipoEquipe[]>();
   const [equipes, setEquipes] = useState<IEquipe[]>();
 
@@ -36,15 +39,35 @@ export default function Equipe() {
   return (
     <BaseMaster>
       <TituloDashboard titulo="Equipe" subTitulo="Equipes do caminho" />
-      {tipoEquipes.map((equipe: ITipoEquipe) => (
-        <li key={equipe.id_tipo_equipe}>{equipe.no_tipo_equipe}</li>
-      ))}
 
-      <br />
+      <InputPequisa
+        onChange={(e) => alert("recurso nao implementado ainda")}
+        placeholder="Nome da equipe ..."
+        svgIcone={svgIconePessoa()}
+        valor={search}
+      />
 
-      {equipes?.map((equipe: IEquipe) => (
-        <li key={equipe.id_equipe}>{equipe.responsavel}</li>
-      ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-3">
+        {equipes
+          ?.map((equipe: IEquipe) => (
+            <div
+              key={`equipe-${equipe.id_equipe}`}
+              className="bg-teal-400 p-3 rounded-md"
+            >
+              <h3 className="text-lg">{equipe.responsavel}</h3>
+              {tipoEquipes
+                .filter((t) => t.id_tipo_equipe === equipe.id_tipo_equipe)
+                .map((t) => (
+                  <div>
+                    <h3 className="text-sm font-light">
+                      Tipo :{t.no_tipo_equipe}
+                    </h3>
+                  </div>
+                ))}
+            </div>
+          ))
+          .slice(0, 12)}
+      </div>
     </BaseMaster>
   );
 }

@@ -10,6 +10,8 @@ import { LocalidadesData, PessoasData } from "../api/cncApi";
 import ILocalidade from "../../model/ILocalidade";
 import ErroCarregamento from "../erroCarregamento";
 import removerAcento from "../../utils/utils";
+import svgIconePessoa from "../../utils/svg";
+import InputPequisa from "../../components/dashboard/InputPesquisa";
 
 export default function Pessoa() {
   const [search, setSearch] = useState("");
@@ -50,21 +52,12 @@ export default function Pessoa() {
         titulo="Pessoas"
       />
 
-      <div className="bg-lime-300 p-2 mt-3 rounded-md">
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            {renderIconePessoa()}
-          </div>
-          <input
-            type="text"
-            name="search"
-            placeholder="Nome da pessoa ..."
-            onChange={(e) => setSearch(e.target.value)}
-            value={search}
-            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg hover:bg-lime-100 focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-          />
-        </div>
-      </div>
+      <InputPequisa
+        onChange={(e) => setSearch(e.target.value)}
+        valor={search}
+        placeholder="Nome da pessoa ..."
+        svgIcone={svgIconePessoa()}
+      />
 
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {search.length > 0
@@ -77,25 +70,6 @@ export default function Pessoa() {
       </div>
     </BaseMaster>
   );
-
-  function renderIconePessoa() {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="w-6 h-6 text-gray-500 dark:text-gray-400"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-        />
-      </svg>
-    );
-  }
 
   function renderCardPessoa(
     p: IPessoa,

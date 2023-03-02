@@ -9,24 +9,25 @@ import { useEffect, useState } from "react";
 import { LocalidadesData, PessoasData } from "../api/cncApi";
 import utils from "../../utils/utils";
 import ILocalidade from "../../model/ILocalidade";
+import ErroCarregamento from "../erroCarregamento";
 
 export default function Pessoa() {
   const [search, setSearch] = useState("");
   const [pessoas, setPessoas] = useState<IPessoa[]>();
   const [localidades, setLocalidades] = useState<ILocalidade[]>();
 
-  const { pessoasData } = PessoasData();
-  const { localidadesData } = LocalidadesData();
-  useEffect(() => {
-    if (localidadesData) setLocalidades(localidadesData.data);
-  }, [localidadesData]);
+  const { pessoasData, isErrorPessoas } = PessoasData();
+  // const { localidadesData } = LocalidadesData();
+  // useEffect(() => {
+  //   if (localidadesData) setLocalidades(localidadesData.data);
+  // }, [localidadesData]);
 
   useEffect(() => {
     if (pessoasData) setPessoas(pessoasData.data);
   }, [pessoasData]);
 
+  if (isErrorPessoas) return <ErroCarregamento />;
   if (!pessoas) return <Carregando />;
-  if (!localidades) return <Carregando />;
 
   const pessoasFiltradas =
     search.length > 0
@@ -60,11 +61,9 @@ export default function Pessoa() {
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {search.length > 0
           ? pessoasFiltradas
-              .map((p: IPessoa) => renderCardPessoa(p, localidades))
+              .map((p: IPessoa) => renderCardPessoa(p))
               .slice(0, 24)
-          : pessoas
-              .map((p: IPessoa) => renderCardPessoa(p, localidades))
-              .slice(0, 12)}
+          : pessoas.map((p: IPessoa) => renderCardPessoa(p)).slice(0, 12)}
       </div>
     </BaseMaster>
   );
@@ -88,10 +87,7 @@ export default function Pessoa() {
     );
   }
 
-  function renderCardPessoa(
-    p: IPessoa,
-    localidades: ILocalidade[]
-  ): JSX.Element {
+  function renderCardPessoa(p: IPessoa): JSX.Element {
     return (
       <div key={p.id_pessoa}>
         <Link
@@ -113,13 +109,13 @@ export default function Pessoa() {
               />
               <div>
                 <h4 className="font-normal text-base">{p.no_pessoa}</h4>
-                <h3 className="text-sm font-light">
+                {/* <h3 className="text-sm font-light">
                   {localidades
                     .filter((local) => local.id_localidade === p.id_localidade)
                     .map((localidade) => (
                       <h1>{localidade.no_localidade}</h1>
                     ))}
-                </h3>
+                </h3> */}
               </div>
             </div>
           </div>

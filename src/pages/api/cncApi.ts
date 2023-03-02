@@ -4,7 +4,7 @@ import useSWRImmutable from "swr/immutable";
 const URL_CNC_BRASIL: string = "https://apicncbrasil.cn.org.br/api";
 const LOCAL_URL: string = "http://localhost:3000";
 
-async function getToken(): Promise<any> {
+async function getToken(): Promise<string> {
   const response = await fetch(`${LOCAL_URL}/api/cnc`);
   const data = await response.json();
   return data.token;
@@ -104,6 +104,18 @@ export function TipoEquipesData() {
     tipoEquipesData: data,
     isLoadingTipoEquipes: isLoading,
     isErrorTipoEquipes: error,
+  };
+}
+
+export function EquipesData() {
+  const { data, error, isLoading } = useSWRImmutable(
+    `${URL_CNC_BRASIL}/equipes`,
+    fetcher
+  );
+  return {
+    equipesData: data,
+    isLoadingEquipes: isLoading,
+    isErrorEquipes: error,
   };
 }
 

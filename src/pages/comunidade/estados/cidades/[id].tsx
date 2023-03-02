@@ -39,8 +39,8 @@ export default function CidadeId() {
     if (tipoLocaisData) setTipoLocais(tipoLocaisData.data);
   }, [tipoLocaisData]);
 
-  if (!localidades) return <Carregando />;
-  if (!tipoDioceses) return <Carregando />;
+  if (!localidades) return <Carregando objetoCarregando="Localidades" />;
+  if (!tipoDioceses) return <Carregando objetoCarregando="Tipo de dioceses" />;
 
   return (
     <BaseMaster>

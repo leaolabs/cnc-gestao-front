@@ -29,8 +29,9 @@ export default function Equipe() {
   if (!tipoEquipes) return <Carregando objetoCarregando="Tipo Equipes" />;
   if (!equipes) return <Carregando objetoCarregando="Equipes" />;
 
-  if (isErrorEquipes) return <ErroCarregamento />;
-  if (isErrorTipoEquipes) return <ErroCarregamento />;
+  if (isErrorEquipes) return <ErroCarregamento objetoQueDeuErro="Equipes" />;
+  if (isErrorTipoEquipes)
+    return <ErroCarregamento objetoQueDeuErro="Tipo de equipes" />;
 
   return (
     <BaseMaster>

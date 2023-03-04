@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Select, { SingleValue } from "react-select";
-import BaseMaster from "..";
+import RootLayout from "..";
 import TituloDashboard from "../../components/dashboard/Titulo";
 import IEstado from "../../model/IEstado";
 import IPais from "../../model/IPais";
@@ -58,7 +58,7 @@ export default function Comunidade(): JSX.Element {
   }
 
   return (
-    <BaseMaster>
+    <RootLayout>
       <TituloDashboard
         titulo="Comunidade"
         subTitulo="Selecione um país / estado"
@@ -93,6 +93,6 @@ export default function Comunidade(): JSX.Element {
             </Link>
           ))}
       </div>
-    </BaseMaster>
+    </RootLayout>
   );
 }

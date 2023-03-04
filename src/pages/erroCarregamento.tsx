@@ -1,4 +1,4 @@
-import BaseMaster from ".";
+import RootLayout from ".";
 
 interface ErroCarregamentoProps {
   objetoQueDeuErro: string;
@@ -10,10 +10,10 @@ export default function ErroCarregamento(
   let inicioRequest = new Date();
 
   return (
-    <BaseMaster>
+    <RootLayout>
       <h2 className="text-sm font-bold">
         Ocorreu um erro ao carregar dados da API de {props.objetoQueDeuErro}
       </h2>
-    </BaseMaster>
+    </RootLayout>
   );
 }

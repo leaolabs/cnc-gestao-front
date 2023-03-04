@@ -1,5 +1,5 @@
 import { ClipLoader } from "react-spinners";
-import BaseMaster from ".";
+import RootLayout from ".";
 
 interface CarregandoProps {
   objetoCarregando: string;
@@ -9,7 +9,7 @@ export default function Carregando(props: CarregandoProps) {
   let inicioRequest = new Date();
 
   return (
-    <BaseMaster>
+    <RootLayout>
       <h2 className="text-sm font-bold">
         Inicio request:{" "}
         <span className="italic font-light">{inicioRequest.toString()}</span>
@@ -24,6 +24,6 @@ export default function Carregando(props: CarregandoProps) {
         size={60}
         speedMultiplier={1}
       />
-    </BaseMaster>
+    </RootLayout>
   );
 }

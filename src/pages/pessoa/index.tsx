@@ -1,5 +1,5 @@
 import Image from "next/image";
-import BaseMaster from "..";
+import RootLayout from "..";
 import TituloDashboard from "../../components/dashboard/Titulo";
 import IPessoa from "../../model/IPessoa";
 import Carregando from "../carregando";
@@ -10,8 +10,8 @@ import { LocalidadesData, PessoasData } from "../api/cncApi";
 import ILocalidade from "../../model/ILocalidade";
 import ErroCarregamento from "../erroCarregamento";
 import removerAcento from "../../utils/utils";
-import svgIconePessoa from "../../utils/svg";
 import InputPequisa from "../../components/dashboard/InputPesquisa";
+import { IconePessoa } from "../../utils/Icones";
 
 export default function Pessoa() {
   const [search, setSearch] = useState("");
@@ -29,12 +29,12 @@ export default function Pessoa() {
     if (pessoasData) setPessoas(pessoasData.data);
   }, [pessoasData]);
 
-  if (isErrorPessoas) return <ErroCarregamento objetoQueDeuErro="Pessoas" />;
   if (isErrorLocalidade)
     return <ErroCarregamento objetoQueDeuErro="Localidades" />;
+  if (isErrorPessoas) return <ErroCarregamento objetoQueDeuErro="Pessoas" />;
 
-  if (!pessoas) return <Carregando objetoCarregando="Pessoas" />;
   if (!localidades) return <Carregando objetoCarregando="Localidades" />;
+  if (!pessoas) return <Carregando objetoCarregando="Pessoas" />;
 
   const pessoasFiltradas =
     search.length > 0
@@ -46,7 +46,7 @@ export default function Pessoa() {
       : [];
 
   return (
-    <BaseMaster>
+    <RootLayout>
       <TituloDashboard
         subTitulo={`${pessoas.length} irmãos`}
         titulo="Pessoas"
@@ -56,7 +56,7 @@ export default function Pessoa() {
         onChange={(e) => setSearch(e.target.value)}
         valor={search}
         placeholder="Nome da pessoa ..."
-        svgIcone={svgIconePessoa()}
+        icone={IconePessoa}
       />
 
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
@@ -68,7 +68,7 @@ export default function Pessoa() {
               .map((p: IPessoa) => renderCardPessoa(p, localidades))
               .slice(0, 12)}
       </div>
-    </BaseMaster>
+    </RootLayout>
   );
 
   function renderCardPessoa(

@@ -3,13 +3,10 @@ import TituloDashboard from "../../components/dashboard/Titulo";
 import InputPequisa from "../../components/dashboard/InputPesquisa";
 import { IconePessoa } from "../../utils/Icones";
 
-export default function Pessoa() {
+export default function Carisma() {
   return (
     <RootLayout>
-      <TituloDashboard
-        subTitulo={`Carisma irmãos`}
-        titulo="Parte em construção"
-      />
+      <TituloDashboard subTitulo={"Pagina em construção"} titulo="Carisma" />
 
       <InputPequisa
         onChange={(e) => alert("nao implementado ainda")}

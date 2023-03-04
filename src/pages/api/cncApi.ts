@@ -104,6 +104,18 @@ export function TipoLocaisData() {
   };
 }
 
+export function TipoCarismaComunidades() {
+  const { data, error, isLoading } = useSWRImmutable(
+    `${URL_CNC_BRASIL}/tipo_carisma_comunidades`,
+    fetcher, { refreshInterval: 5000 }
+  );
+  return {
+    tipoCarismaComunidadesData: data,
+    isLoadingTipoCarismaComunidades: isLoading,
+    isErrorTipoCarismaComunidades: error,
+  };
+}
+
 export function TipoEquipesData() {
   const { data, error, isLoading } = useSWRImmutable(
     `${URL_CNC_BRASIL}/tipo_equipes`,
@@ -119,7 +131,8 @@ export function TipoEquipesData() {
 export function EquipesData() {
   const { data, error, isLoading } = useSWR(
     `${URL_CNC_BRASIL}/equipes`,
-    fetcherWithToken
+    fetcherWithToken,
+    { refreshInterval: 5000 }
   );
   return {
     equipesData: data,

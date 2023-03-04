@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import BaseMaster from "..";
+import RootLayout from "..";
 import TituloDashboard from "../../components/dashboard/Titulo";
 
 export default function PessoaId() {
@@ -7,13 +7,13 @@ export default function PessoaId() {
   const { id, nomePessoa } = router.query;
 
   return (
-    <BaseMaster>
+    <RootLayout>
       <TituloDashboard titulo={`${nomePessoa}`} subTitulo="Dados da pessoa" />
       <div>
         <h1>
           Pessoa {nomePessoa} | ID: {id}
         </h1>
       </div>
-    </BaseMaster>
+    </RootLayout>
   );
 }

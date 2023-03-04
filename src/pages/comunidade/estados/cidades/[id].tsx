@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import BaseMaster from "../../..";
+import RootLayout from "../../..";
 import TituloDashboard from "../../../../components/dashboard/Titulo";
 import ILocalidade from "../../../../model/ILocalidade";
 import ITipoDiocese from "../../../../model/ITipoDiocese";
@@ -43,7 +43,7 @@ export default function CidadeId() {
   if (!tipoDioceses) return <Carregando objetoCarregando="Tipo de dioceses" />;
 
   return (
-    <BaseMaster>
+    <RootLayout>
       <TituloDashboard
         titulo={`${nomeCidade}`}
         subTitulo={`Paróquias: ${
@@ -73,6 +73,6 @@ export default function CidadeId() {
             </div>
           ))}
       </div>
-    </BaseMaster>
+    </RootLayout>
   );
 }

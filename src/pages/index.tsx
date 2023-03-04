@@ -2,10 +2,17 @@ import Head from "next/head";
 import Link from "next/link";
 import Script from "next/script";
 import Logo from "../components/dashboard/Logo";
-import { IconeComunidade, IconeEquipe, IconeHome, IconePessoas, IconeRelatorio } from "../components/nav/Icones";
 import Nav from "../components/nav/Nav";
+import {
+  IconeHome,
+  IconePessoas,
+  IconeEquipe,
+  IconeComunidade,
+  IconeRelatorio,
+  IconeCoracao,
+} from "../utils/Icones";
 
-export default function BaseMaster({ children }: any) {
+export default function RootLayout({ children }: any): JSX.Element {
   return (
     <>
       <Script src="/js/cnc.js" />
@@ -57,7 +64,12 @@ export default function BaseMaster({ children }: any) {
               <Nav descricao="Home" url="/" icone={IconeHome}></Nav>
               <Nav descricao="Pessoas" url="/pessoa" icone={IconePessoas}></Nav>
               <Nav descricao="Equipe" url="/equipe" icone={IconeEquipe}></Nav>
-              <Nav descricao="Comunidade" url="/comunidade" icone={IconeComunidade}></Nav>
+              <Nav descricao="Carismas" url="/carisma" icone={IconeCoracao}></Nav>
+              <Nav
+                descricao="Comunidade"
+                url="/comunidade"
+                icone={IconeComunidade}
+              ></Nav>
               <Nav descricao="Relatorios" url="/" icone={IconeRelatorio}></Nav>
             </nav>
           </div>

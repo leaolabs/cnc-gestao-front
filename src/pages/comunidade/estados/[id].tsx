@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import BaseMaster from "../..";
+import RootLayout from "../..";
 import TituloDashboard from "../../../components/dashboard/Titulo";
 import ICidade from "../../../model/ICidade";
 import ILocalidade from "../../../model/ILocalidade";
@@ -52,7 +52,7 @@ export default function EstadoId() {
   }
 
   return (
-    <BaseMaster>
+    <RootLayout>
       <TituloDashboard
         titulo={`${nomeEstado}`}
         subTitulo={`Lista de comunidades`}
@@ -76,6 +76,6 @@ export default function EstadoId() {
             </Link>
           ))}
       </div>
-    </BaseMaster>
+    </RootLayout>
   );
 }

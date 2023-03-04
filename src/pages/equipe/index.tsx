@@ -37,9 +37,9 @@ export default function Equipe() {
     search.length > 0
       ? equipes.filter((e) => {
           if (!e.responsavel) {
-            return ''
+            return "";
           }
-          const nomeEquipe = removerAcento(e.responsavel || '').toLowerCase();
+          const nomeEquipe = removerAcento(e.responsavel || "").toLowerCase();
           const nomeEquipePesquisa = removerAcento(search).toLowerCase();
           return nomeEquipe.includes(nomeEquipePesquisa);
         })

@@ -15,14 +15,15 @@ import {
 export default function RootLayout({ children }: any): JSX.Element {
   return (
     <>
-      <Script src="/js/cnc.js" />
       <Head>
         <title>CNC Gestão</title>
         <meta name="description" content="CNC Gestão" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        {/* <script type="text/javascript" src="/js/cnc.js"></script> */}
       </Head>
       <main>
+        <Script src="/js/cnc.js" strategy="beforeInteractive" />
         <div className="relative min-h-screen md:flex">
           {/* mobile menu bar */}
           <div className="md:hidden bg-gray-700 text-gray-100 flex justify-between">
@@ -64,13 +65,21 @@ export default function RootLayout({ children }: any): JSX.Element {
               <Nav descricao="Home" url="/" icone={IconeHome}></Nav>
               <Nav descricao="Pessoas" url="/pessoa" icone={IconePessoas}></Nav>
               <Nav descricao="Equipe" url="/equipe" icone={IconeEquipe}></Nav>
-              <Nav descricao="Carismas" url="/carisma" icone={IconeCoracao}></Nav>
+              <Nav
+                descricao="Carismas"
+                url="/carisma"
+                icone={IconeCoracao}
+              ></Nav>
               <Nav
                 descricao="Comunidade"
                 url="/comunidade"
                 icone={IconeComunidade}
               ></Nav>
-              <Nav descricao="Relatorios" url="/" icone={IconeRelatorio}></Nav>
+              <Nav
+                descricao="Relatorios"
+                url="/relatorio"
+                icone={IconeRelatorio}
+              ></Nav>
             </nav>
           </div>
 

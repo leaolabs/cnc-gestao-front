@@ -7,8 +7,6 @@ interface ErroCarregamentoProps {
 export default function ErroCarregamento(
   props: ErroCarregamentoProps
 ): JSX.Element {
-  let inicioRequest = new Date();
-
   return (
     <RootLayout>
       <h2 className="text-sm font-bold">

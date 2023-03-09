@@ -66,7 +66,7 @@ export default function Sidebar() {
       <div className="pt-2">
         {menus.map((menu, index) => (
           <>
-            <Link href={menu.href}>
+            <Link key={`menu-${index}`} href={menu.href}>
               <li
                 key={index}
                 className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-lime-700 rounded-md mt-2"
@@ -92,7 +92,7 @@ export default function Sidebar() {
               {menu.submenu && submenuOpen && sidebarOpen && (
                 <ul>
                   {menu.submenuItems?.map((submenuItem, index) => (
-                    <Link href={submenuItem.href}>
+                    <Link key={`subitem-menu-${index}`} href={submenuItem.href}>
                       <li
                         key={index}
                         className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-lime-700 rounded-md mt-2 px-5"

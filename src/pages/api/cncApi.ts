@@ -107,7 +107,8 @@ export function TipoLocaisData() {
 export function TipoCarismaComunidades() {
   const { data, error, isLoading } = useSWRImmutable(
     `${URL_CNC_BRASIL}/tipo_carisma_comunidades`,
-    fetcher, { refreshInterval: 5000 }
+    fetcher,
+    { refreshInterval: 5000 }
   );
   return {
     tipoCarismaComunidadesData: data,
@@ -132,7 +133,7 @@ export function EquipesData() {
   const { data, error, isLoading } = useSWR(
     `${URL_CNC_BRASIL}/equipes`,
     fetcherWithToken,
-    { refreshInterval: 5000 }
+    { refreshInterval: 1 }
   );
   return {
     equipesData: data,
@@ -153,7 +154,10 @@ export function PessoasData() {
 export function PessoaByIdData(id: number) {
   const { data, error } = useSWR(
     `${URL_CNC_BRASIL}/pessoas/${id}`,
-    fetcherWithToken
+    fetcherWithToken,
+    {
+      revalidateOnFocus: false,
+    }
   );
   return {
     pessoaByIdData: data,

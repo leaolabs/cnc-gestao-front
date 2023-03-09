@@ -44,7 +44,7 @@ export default function Comunidade(): JSX.Element {
   let optionsPaises: any[] = [];
 
   paises.map((p) => {
-    optionsPaises?.push({
+    optionsPaises.push({
       value: p.id_pais,
       label: p.no_pais,
     });
@@ -72,25 +72,29 @@ export default function Comunidade(): JSX.Element {
         placeholder="Selecione um pais"
       />
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
+      <div className="flex flex-wrap gap-4 mt-4">
         {estados
           .filter((uf) => uf.id_pais === pais.id_pais)
           .map((estado: IEstado) => (
-            <Link
-              key={`estado-id-${estado.id_estado}`}
-              href={{
-                pathname: `comunidade/estados/[id]`,
-                query: {
-                  id: estado.id_estado,
-                  nomeEstado: estado.no_estado,
-                },
-              }}
-            >
-              <div className="flex justify-center border border-green-700 rounded-lg p-2 font-light hover:font-bold bg-amber-50 hover:bg-amber-100 text-green-900">
-                <div className="pr-3 hidden sm:block">{estado.no_estado}</div>
-                <div className="font-semibold">{estado.sg_estado}</div>
-              </div>
-            </Link>
+            <>
+              <Link
+                key={`estado-id-${estado.id_estado}`}
+                href={{
+                  pathname: `comunidade/estados/[id]`,
+                  query: {
+                    id: estado.id_estado,
+                    nomeEstado: estado.no_estado,
+                  },
+                }}
+              >
+                <div className="flex justify-center border border-green-700 rounded-lg p-2 font-light bg-amber-50 hover:bg-amber-100 text-green-900">
+                  <div className="pr-3 hidden sm:block text-sm lg:text-xl">
+                    {estado.no_estado}
+                  </div>
+                  <div className="font-semibold">{estado.sg_estado}</div>
+                </div>
+              </Link>
+            </>
           ))}
       </div>
     </RootLayout>

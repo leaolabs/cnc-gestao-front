@@ -26,7 +26,7 @@ export default async function token(
       }),
     };
     const response = await fetch(`${BASE_URL}/auth/login`, params);
-    resposta = response.text;
+    resposta = await response.text;
     const data = await response.json();
     res.status(200).json({ token: `Bearer ${data.access_token}` });
   } catch (e) {

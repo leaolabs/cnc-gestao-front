@@ -19,25 +19,26 @@ interface IMenus {
   icone?: JSX.Element;
 }
 
+const menus: IMenus[] = [
+  { href: "/", title: "Dashboard" },
+  {
+    href: "/",
+    title: "Carimas",
+    submenu: true,
+    submenuItems: [
+      { href: "/carisma", title: "Levantados" },
+      { href: "/carisma", title: "Matrimonio" },
+    ],
+  },
+  { href: "/equipe", title: "Equipe", spacing: true },
+  { href: "/pessoa", title: "Pessoas" },
+  { href: "/comunidade", title: "Comunidades", spacing: true },
+  { href: "/relatorio", title: "Relatorios" },
+];
+
 export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [submenuOpen, setSubmenuOpen] = useState(false);
-  const menus: IMenus[] = [
-    { href: "/", title: "Dashboard" },
-    {
-      href: "/",
-      title: "Carimas",
-      submenu: true,
-      submenuItems: [
-        { href: "/carisma", title: "Levantados" },
-        { href: "/carisma", title: "Matrimonio" },
-      ],
-    },
-    { href: "/equipe", title: "Equipe", spacing: true },
-    { href: "/pessoa", title: "Pessoas" },
-    { href: "/comunidade", title: "Comunidades", spacing: true },
-    { href: "/relatorio", title: "Relatorios" },
-  ];
 
   return (
     <div
@@ -65,8 +66,8 @@ export default function Sidebar() {
 
       <div className="pt-2">
         {menus.map((menu, index) => (
-          <>
-            <Link key={`menu-${index}`} href={menu.href}>
+          <div key={`menu-${index}`}>
+            <Link href={menu.href}>
               <li
                 key={index}
                 className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-lime-700 rounded-md mt-2"
@@ -104,7 +105,7 @@ export default function Sidebar() {
                 </ul>
               )}
             </Link>
-          </>
+          </div>
         ))}
       </div>
     </div>

@@ -11,6 +11,7 @@ export default async function token(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  let resposta = "";
   try {
     const params: RequestInit = {
       method: "POST",
@@ -26,8 +27,9 @@ export default async function token(
     };
     const response = await fetch(`${BASE_URL}/auth/login`, params);
     const data = await response.json();
+    resposta = data;
     res.status(200).json({ token: `Bearer ${data.access_token}` });
   } catch (e) {
-    res.status(500).json({ token: String(e) });
+    res.status(500).json({ token: String(e) + " - " + resposta });
   }
 }

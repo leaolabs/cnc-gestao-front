@@ -2,7 +2,7 @@ import useSWR from "swr";
 import useSWRImmutable from "swr/immutable";
 
 const URL_CNC_BRASIL: string = "https://apicncbrasil.cn.org.br/api";
-const LOCAL_URL: string = "http://localhost:3000";
+const LOCAL_URL: string = process.env.LOCAL_URL || '';
 
 async function getToken(): Promise<string> {
   const response = await fetch(`${LOCAL_URL}/api/cnc`);

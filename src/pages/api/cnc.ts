@@ -26,10 +26,10 @@ export default async function token(
       }),
     };
     const response = await fetch(`${BASE_URL}/auth/login`, params);
-    resposta = await response.text;
+    resposta = response.statusText;
     const data = await response.json();
     res.status(200).json({ token: `Bearer ${data.access_token}` });
   } catch (e) {
-    res.status(500).json({ token: String(e) + " Resposta: " + resposta });
+    res.status(500).json({ token: String(e) + " Respostaa: " + resposta });
   }
 }

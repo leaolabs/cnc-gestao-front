@@ -28,7 +28,15 @@ export default async function token(
     const response = await fetch(`${BASE_URL}/auth/login`, params);
 
     if (response.status === 403) {
-      res.status(403).json({ token: `Não consegui acessar ${BASE_URL}` });
+      res
+        .status(403)
+        .json({ token: `Status 403: Não consegui acessar ${BASE_URL}` });
+    }
+
+    if (response.status === 500) {
+      res
+        .status(500)
+        .json({ token: `Status 500: Não consegui acessar ${BASE_URL}` });
     }
 
     const data = await response.json();

@@ -11,7 +11,7 @@ export default async function token(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  let resposta;
+  // ATENÇÂO: CNC pode estar bloqueando request fora do Brasil
   try {
     const params: RequestInit = {
       method: "POST",
@@ -26,10 +26,14 @@ export default async function token(
       }),
     };
     const response = await fetch(`${BASE_URL}/auth/login`, params);
-    resposta = response.statusText;
+
+    if (response.status === 403) {
+      res.status(403).json({ token: `Não consegui acessar ${BASE_URL}` });
+    }
+
     const data = await response.json();
     res.status(200).json({ token: `Bearer ${data.access_token}` });
   } catch (e) {
-    res.status(500).json({ token: String(e) + " Respostaa: " + resposta });
+    res.status(500).json({ token: String(e) });
   }
 }

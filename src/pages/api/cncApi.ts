@@ -1,25 +1,19 @@
+import { parseCookies } from "nookies";
 import useSWR from "swr";
 import useSWRImmutable from "swr/immutable";
 
 const URL_CNC_BRASIL: string = "https://apicncbrasil.cn.org.br/api";
-const LOCAL_URL: string = process.env.LOCAL_URL || '';
-
-async function getToken(): Promise<string> {
-  const response = await fetch(`${LOCAL_URL}/api/cnc`);
-  const data = await response.json();
-  return data.token;
-}
 
 const fetcher = (url: RequestInfo | URL): Promise<any> =>
   fetch(url).then((res) => res.json());
 
 async function fetcherWithToken(url: RequestInfo | URL): Promise<any> {
-  const token = await getToken();
+  const { ["cnc-auth-token"]: token } = parseCookies();
   const params: RequestInit = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token,
+      Authorization: "Bearer " + token,
     },
   };
   return await fetch(url, params).then((res) => res.json());

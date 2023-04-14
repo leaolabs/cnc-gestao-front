@@ -19,7 +19,7 @@ type User = {
 
 type AuthContextType = {
   isAuthenticated: boolean;
-  user: User;
+  user: User | null;
   signIn: (data: SignInData) => Promise<void>;
 };
 

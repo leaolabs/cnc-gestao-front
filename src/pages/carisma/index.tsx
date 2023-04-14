@@ -2,6 +2,8 @@ import RootLayout from "..";
 import TituloDashboard from "../../components/dashboard/Titulo";
 import InputPequisa from "../../components/dashboard/InputPesquisa";
 import { IconePessoa } from "../../utils/Icones";
+import { GetServerSideProps } from "next";
+import { validarUsuarioAutenticado } from "../../utils/utils";
 
 export default function Carisma() {
   return (
@@ -21,3 +23,7 @@ export default function Carisma() {
     </RootLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  return validarUsuarioAutenticado(ctx);
+};

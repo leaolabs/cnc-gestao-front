@@ -9,9 +9,10 @@ import { useEffect, useState } from "react";
 import { LocalidadesData, PessoasData } from "../api/cncApi";
 import ILocalidade from "../../model/ILocalidade";
 import ErroCarregamento from "../erroCarregamento";
-import removerAcento from "../../utils/utils";
 import InputPequisa from "../../components/dashboard/InputPesquisa";
 import { IconePessoa } from "../../utils/Icones";
+import { removerAcento, validarUsuarioAutenticado } from "../../utils/utils";
+import { GetServerSideProps } from "next";
 
 export default function Pessoa() {
   const [search, setSearch] = useState("");
@@ -113,3 +114,7 @@ export default function Pessoa() {
     );
   }
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  return validarUsuarioAutenticado(ctx);
+};

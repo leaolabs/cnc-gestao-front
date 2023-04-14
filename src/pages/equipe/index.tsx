@@ -5,10 +5,11 @@ import TituloDashboard from "../../components/dashboard/Titulo";
 import IEquipe from "../../model/IEquipe";
 import ITipoEquipe from "../../model/ITipoEquipe";
 import { IconeComunidade } from "../../utils/Icones";
-import removerAcento from "../../utils/utils";
 import { EquipesData, TipoEquipesData } from "../api/cncApi";
 import Carregando from "../carregando";
 import ErroCarregamento from "../erroCarregamento";
+import { GetServerSideProps } from "next";
+import { removerAcento, validarUsuarioAutenticado } from "../../utils/utils";
 
 export default function Equipe() {
   const [search, setSearch] = useState("");
@@ -88,3 +89,7 @@ export default function Equipe() {
     );
   }
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  return validarUsuarioAutenticado(ctx);
+};

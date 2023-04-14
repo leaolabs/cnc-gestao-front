@@ -7,6 +7,8 @@ import IEstado from "../../model/IEstado";
 import IPais from "../../model/IPais";
 import { PaisesData, EstadosData } from "../api/cncApi";
 import Carregando from "../carregando";
+import { GetServerSideProps } from "next";
+import { validarUsuarioAutenticado } from "../../utils/utils";
 
 const initialState: IPais = {
   id_pais: 1,
@@ -100,3 +102,7 @@ export default function Comunidade(): JSX.Element {
     </RootLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  return validarUsuarioAutenticado(ctx);
+};

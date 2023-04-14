@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import RootLayout from "..";
 import TituloDashboard from "../../components/dashboard/Titulo";
+import { GetServerSideProps } from "next";
+import { validarUsuarioAutenticado } from "../../utils/utils";
 
 export default function PessoaId() {
   const router = useRouter();
@@ -17,3 +19,7 @@ export default function PessoaId() {
     </RootLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  return validarUsuarioAutenticado(ctx);
+};

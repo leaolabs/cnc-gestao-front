@@ -7,6 +7,8 @@ import ICidade from "../../../model/ICidade";
 import ILocalidade from "../../../model/ILocalidade";
 import { CidadesData, LocalidadesData } from "../../api/cncApi";
 import Carregando from "../../carregando";
+import { GetServerSideProps } from "next";
+import { validarUsuarioAutenticado } from "../../../utils/utils";
 
 export default function EstadoId() {
   const router = useRouter();
@@ -79,3 +81,7 @@ export default function EstadoId() {
     </RootLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  return validarUsuarioAutenticado(ctx);
+};

@@ -1,5 +1,7 @@
+import { GetServerSideProps } from "next";
 import RootLayout from "..";
 import TituloDashboard from "../../components/dashboard/Titulo";
+import { validarUsuarioAutenticado } from "../../utils/utils";
 
 export default function Relatorio() {
   return (
@@ -8,3 +10,7 @@ export default function Relatorio() {
     </RootLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  return validarUsuarioAutenticado(ctx);
+};

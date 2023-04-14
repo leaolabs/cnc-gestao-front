@@ -11,6 +11,8 @@ import {
   TipoLocaisData,
 } from "../../../api/cncApi";
 import Carregando from "../../../carregando";
+import { validarUsuarioAutenticado } from "../../../../utils/utils";
+import { GetServerSideProps } from "next";
 
 export default function CidadeId() {
   const router = useRouter();
@@ -76,3 +78,7 @@ export default function CidadeId() {
     </RootLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  return validarUsuarioAutenticado(ctx);
+};

@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { useState } from "react";
 import { AiFillEnvironment } from "react-icons/ai";
-import { BiArrowFromRight } from "react-icons/bi";
+import { BiArrowFromRight, BiChurch } from "react-icons/bi";
 import { BsChevronDoubleDown } from "react-icons/bs";
-import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { MdOutlineSpaceDashboard, MdOutlineEmojiPeople } from "react-icons/md";
+import { IoIosPeople } from "react-icons/io";
+import { IoPeopleSharp } from "react-icons/io5";
+import { TbReport } from "react-icons/tb";
+import { FaGithub } from "react-icons/fa";
 
 interface ISubmenuItem {
   title: string;
@@ -20,20 +24,31 @@ interface IMenus {
 }
 
 const menus: IMenus[] = [
-  { href: "/", title: "Dashboard" },
+  { href: "/", title: "Dashboard", icone: <MdOutlineSpaceDashboard /> },
   {
     href: "/",
     title: "Carimas",
+    icone: <MdOutlineEmojiPeople />,
     submenu: true,
     submenuItems: [
       { href: "/carisma", title: "Levantados" },
       { href: "/carisma", title: "Matrimonio" },
     ],
   },
-  { href: "/equipe", title: "Equipe", spacing: true },
-  { href: "/pessoa", title: "Pessoas" },
-  { href: "/comunidade", title: "Comunidades", spacing: true },
-  { href: "/relatorio", title: "Relatorios" },
+  { href: "/equipe", title: "Equipe", spacing: true, icone: <IoIosPeople /> },
+  { href: "/pessoa", title: "Pessoas", icone: <IoPeopleSharp /> },
+  {
+    href: "/comunidade",
+    title: "Comunidades",
+    icone: <BiChurch />,
+    spacing: true,
+  },
+  { href: "/relatorio", title: "Relatorios", icone: <TbReport /> },
+  {
+    href: "https://github.com/leaolabs/cnc-gestao-front",
+    title: "Projeto (fonte)",
+    icone: <FaGithub />,
+  },
 ];
 
 export default function Sidebar() {
@@ -73,7 +88,7 @@ export default function Sidebar() {
                 className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-lime-700 rounded-md mt-2"
               >
                 <span className="text-2xl block float-left">
-                  <MdOutlineSpaceDashboard />
+                  {menu.icone ? menu.icone : <MdOutlineSpaceDashboard />}
                 </span>
                 <span
                   className={`text-base font-medium flex-1 duration-300 ${

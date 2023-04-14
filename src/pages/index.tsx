@@ -1,7 +1,15 @@
 import Head from "next/head";
 import Sidebar from "../components/sidebar/Sidebar";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import { getAPIClient } from "../services/cnc";
+import { GetServerSideProps } from "next";
+import { parseCookies } from "nookies";
 
 export default function RootLayout({ children }: any): JSX.Element {
+  const { user } = useContext(AuthContext);
+  // exemplo aqui https://youtu.be/pvrKHpXGO8E?list=PL85ITvJ7FLohhULgUFkYBf2xcXCG6yfVV&t=2799
+
   return (
     <>
       <Head>
@@ -19,3 +27,20 @@ export default function RootLayout({ children }: any): JSX.Element {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { ["cnc-auth-token"]: token } = parseCookies(ctx);
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

@@ -1,8 +1,7 @@
 import { parseCookies } from "nookies";
 import useSWR from "swr";
 import useSWRImmutable from "swr/immutable";
-
-const URL_CNC_BRASIL: string = "https://apicncbrasil.cn.org.br/api";
+import { LOCAL_URL_API } from "../../utils/constants";
 
 const fetcher = (url: RequestInfo | URL): Promise<any> =>
   fetch(url).then((res) => res.json());
@@ -20,7 +19,7 @@ async function fetcherWithToken(url: RequestInfo | URL): Promise<any> {
 }
 
 export function ComunidadesData() {
-  const { data, error } = useSWR(`${URL_CNC_BRASIL}/comunidades`, fetcher);
+  const { data, error } = useSWR(`${LOCAL_URL_API}/cnc/comunidades`, fetcher);
 
   return {
     comunidadesData: data,
@@ -31,7 +30,7 @@ export function ComunidadesData() {
 
 export function LocalidadesData() {
   const { data, error } = useSWRImmutable(
-    `${URL_CNC_BRASIL}/localidades`,
+    `${LOCAL_URL_API}/cnc/localidades`,
     fetcher
   );
 
@@ -43,7 +42,10 @@ export function LocalidadesData() {
 }
 
 export function CidadesData() {
-  const { data, error } = useSWRImmutable(`${URL_CNC_BRASIL}/cidades`, fetcher);
+  const { data, error } = useSWRImmutable(
+    `${LOCAL_URL_API}/cnc/cidades`,
+    fetcher
+  );
 
   return {
     cidadesData: data,
@@ -53,7 +55,10 @@ export function CidadesData() {
 }
 
 export function EstadosData() {
-  const { data, error } = useSWRImmutable(`${URL_CNC_BRASIL}/estados`, fetcher);
+  const { data, error } = useSWRImmutable(
+    `${LOCAL_URL_API}/cnc/estados`,
+    fetcher
+  );
 
   return {
     estadosData: data,
@@ -63,7 +68,10 @@ export function EstadosData() {
 }
 
 export function PaisesData() {
-  const { data, error } = useSWRImmutable(`${URL_CNC_BRASIL}/paises`, fetcher);
+  const { data, error } = useSWRImmutable(
+    `${LOCAL_URL_API}/cnc/paises`,
+    fetcher
+  );
 
   return {
     paisesData: data,
@@ -74,7 +82,7 @@ export function PaisesData() {
 
 export function TipoDiocesesData() {
   const { data, error } = useSWRImmutable(
-    `${URL_CNC_BRASIL}/tipo_dioceses`,
+    `${LOCAL_URL_API}/cnc/tipo_dioceses`,
     fetcher
   );
 
@@ -87,7 +95,7 @@ export function TipoDiocesesData() {
 
 export function TipoLocaisData() {
   const { data, error } = useSWRImmutable(
-    `${URL_CNC_BRASIL}/tipo_locais`,
+    `${LOCAL_URL_API}/cnc/tipo_locais`,
     fetcher
   );
 
@@ -100,7 +108,7 @@ export function TipoLocaisData() {
 
 export function TipoCarismaComunidades() {
   const { data, error, isLoading } = useSWRImmutable(
-    `${URL_CNC_BRASIL}/tipo_carisma_comunidades`,
+    `${LOCAL_URL_API}/cnc/tipo_carisma_comunidades`,
     fetcher,
     { refreshInterval: 5000 }
   );
@@ -113,7 +121,7 @@ export function TipoCarismaComunidades() {
 
 export function TipoEquipesData() {
   const { data, error, isLoading } = useSWRImmutable(
-    `${URL_CNC_BRASIL}/tipo_equipes`,
+    `${LOCAL_URL_API}/cnc/tipo_equipes`,
     fetcher
   );
   return {
@@ -125,9 +133,11 @@ export function TipoEquipesData() {
 
 export function EquipesData() {
   const { data, error, isLoading } = useSWR(
-    `${URL_CNC_BRASIL}/equipes`,
+    `${LOCAL_URL_API}/cnc/equipes`,
     fetcherWithToken,
-    { refreshInterval: 1 }
+    {
+      refreshInterval: 3000,
+    }
   );
   return {
     equipesData: data,
@@ -137,7 +147,10 @@ export function EquipesData() {
 }
 
 export function PessoasData() {
-  const { data, error } = useSWR(`${URL_CNC_BRASIL}/pessoas`, fetcherWithToken);
+  const { data, error } = useSWR(
+    `${LOCAL_URL_API}/cnc/pessoas`,
+    fetcherWithToken
+  );
   return {
     pessoasData: data,
     isLoadingPessoas: !error && !data,
@@ -147,7 +160,7 @@ export function PessoasData() {
 
 export function PessoaByIdData(id: number) {
   const { data, error } = useSWR(
-    `${URL_CNC_BRASIL}/pessoas/${id}`,
+    `${LOCAL_URL_API}/cnc/pessoas/${id}`,
     fetcherWithToken,
     {
       revalidateOnFocus: false,

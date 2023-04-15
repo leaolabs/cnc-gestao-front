@@ -57,7 +57,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`bg-green-800 h-screen p-5 pt-8 
+      className={`bg-green-800 max-h-max p-5 pt-8 
         ${sidebarOpen ? "w-72" : "w-20"} duration-300 relative`}
     >
       <BiArrowFromRight

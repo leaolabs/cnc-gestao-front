@@ -6,7 +6,7 @@ interface TituloDashboardProps {
 
 export default function TituloDashboard(props: TituloDashboardProps) {
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap items-center">
       {props.icone}
       <h1 className="text-3xl sm:text-5xl pr-4 text-lime-900">
         {props.titulo}

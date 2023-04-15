@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
 import RootLayout from "..";
+import { useEffect, useState } from "react";
+import { GetServerSideProps } from "next";
 import InputPequisa from "../../components/dashboard/InputPesquisa";
 import TituloDashboard from "../../components/dashboard/Titulo";
 import IEquipe from "../../model/IEquipe";
 import ITipoEquipe from "../../model/ITipoEquipe";
-import { IconeComunidade } from "../../utils/Icones";
 import { EquipesData, TipoEquipesData } from "../api/cncApi";
 import Carregando from "../carregando";
 import ErroCarregamento from "../erroCarregamento";
-import { GetServerSideProps } from "next";
 import { removerAcento, validarUsuarioAutenticado } from "../../utils/utils";
 
 export default function Equipe() {
@@ -49,42 +48,77 @@ export default function Equipe() {
   return (
     <RootLayout>
       <TituloDashboard titulo="Equipe" subTitulo="Equipes do caminho" />
+      {/* 
 
       <InputPequisa
         onChange={(e) => setSearch(e.target.value)}
         valor={search}
         placeholder="Nome da pessoa ..."
         icone={IconeComunidade}
-      />
+      /> */}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-3">
-        {search.length > 0
-          ? equipesFiltradas.map((e: IEquipe) =>
-              renderCardEquipe(e, tipoEquipes)
-            )
-          : equipes
-              .map((equipe: IEquipe) => renderCardEquipe(equipe, tipoEquipes))
-              .slice(0, 21)}
+      <div className="flex flex-wrap gap-4 mt-1">
+        <section className="text-gray-600 body-font">
+          <div className="container px-5 py-24 mx-auto">
+            <div className="flex flex-wrap -m-2">
+              {search.length > 0
+                ? equipesFiltradas.map((e: IEquipe) =>
+                    renderSquadCard(e, tipoEquipes)
+                  )
+                : equipes
+                    .map((e: IEquipe) => renderSquadCard(e, tipoEquipes))
+                    .slice(0, 21)}
+              <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
+                <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                  <img
+                    alt="team"
+                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                    src="https://dummyimage.com/80x80"
+                  />
+                  <div className="flex-grow">
+                    <h2 className="text-gray-900 title-font font-medium">
+                      Holden Caulfield
+                    </h2>
+                    <p className="text-gray-500">UI Designer</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </RootLayout>
   );
 
-  function renderCardEquipe(equipe: IEquipe, tipoEquipes: ITipoEquipe[]) {
+  function renderSquadCard(squad: IEquipe, squadTypes: ITipoEquipe[]) {
     return (
       <div
-        key={`equipe-${equipe.id_equipe}`}
-        className="bg-teal-400 p-3 rounded-md"
+        key={`squad-id-${squad.id_equipe}`}
+        className="p-2 lg:w-1/3 md:w-1/2 w-full"
       >
-        <h3 className="text-lg">{equipe.responsavel}</h3>
-        {tipoEquipes
-          .filter((t) => t.id_tipo_equipe === equipe.id_tipo_equipe)
-          .map((t) => (
-            <div
-              key={`tipo-equipe-${t.id_tipo_equipe}-equipe-${equipe.id_equipe}`}
-            >
-              <h3 className="text-sm font-light">Tipo :{t.no_tipo_equipe}</h3>
-            </div>
-          ))}
+        <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+          <img
+            alt="team"
+            className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+            src="https://dummyimage.com/100x90"
+          />
+          <div className="flex-grow">
+            <h2 className="text-gray-900 title-font font-medium">
+              {squad.responsavel}
+            </h2>
+            <p className="text-gray-500">
+              {squadTypes
+                .filter((t) => t.id_tipo_equipe === squad.id_tipo_equipe)
+                .map((t) => (
+                  <div
+                    key={`tipo-equipe-${t.id_tipo_equipe}-equipe-${squad.id_equipe}`}
+                  >
+                    {t.no_tipo_equipe}
+                  </div>
+                ))}
+            </p>
+          </div>
+        </div>
       </div>
     );
   }

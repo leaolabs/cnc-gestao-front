@@ -8,7 +8,7 @@ export function validarUsuarioAutenticado(ctx: any) {
   const { ["cnc-auth-token"]: token } = parseCookies(ctx);
 
   if (!token) {
-    console.log("User not authenticated");
+    console.log(" -- User not authenticated");
     return {
       redirect: {
         destination: "/login",
@@ -16,7 +16,7 @@ export function validarUsuarioAutenticado(ctx: any) {
       },
     };
   } else {
-    console.log("User authenticated");
+    console.log(" -- User authenticated");
   }
 
   return {

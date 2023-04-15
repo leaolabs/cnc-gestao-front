@@ -20,7 +20,7 @@ export default function RootLayout({ children }: any): JSX.Element {
       <main>
         <div className="flex">
           <Sidebar />
-          <div className="p-7">{children}</div>
+          {children}
         </div>
       </main>
     </>

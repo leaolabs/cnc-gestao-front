@@ -7,7 +7,7 @@ interface InputPesquisaProps {
 
 export default function InputPequisa(props: InputPesquisaProps) {
   return (
-    <div className="bg-lime-300 p-2 mt-3 rounded-md">
+    <div className="bg-lime-300 p-1 mt-3 rounded-md">
       <div className="relative">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           {props.icone}

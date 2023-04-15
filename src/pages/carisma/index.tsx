@@ -4,6 +4,7 @@ import InputPequisa from "../../components/dashboard/InputPesquisa";
 import { IconePessoa } from "../../utils/Icones";
 import { GetServerSideProps } from "next";
 import { validarUsuarioAutenticado } from "../../utils/utils";
+import Image from "next/image";
 
 export default function Carisma() {
   return (
@@ -31,7 +32,7 @@ export default function Carisma() {
             <div className="flex flex-wrap -m-4">
               <div className="p-4 lg:w-1/4 md:w-1/2">
                 <div className="h-full flex flex-col items-center text-center">
-                  <img
+                  <Image
                     alt="team"
                     className="flex-shrink-0 rounded-lg w-full h-56 object-cover object-center mb-4"
                     src="https://dummyimage.com/200x200"
@@ -91,7 +92,7 @@ export default function Carisma() {
               </div>
               <div className="p-4 lg:w-1/4 md:w-1/2">
                 <div className="h-full flex flex-col items-center text-center">
-                  <img
+                  <Image
                     alt="team"
                     className="flex-shrink-0 rounded-lg w-full h-56 object-cover object-center mb-4"
                     src="https://dummyimage.com/201x201"
@@ -151,7 +152,7 @@ export default function Carisma() {
               </div>
               <div className="p-4 lg:w-1/4 md:w-1/2">
                 <div className="h-full flex flex-col items-center text-center">
-                  <img
+                  <Image
                     alt="team"
                     className="flex-shrink-0 rounded-lg w-full h-56 object-cover object-center mb-4"
                     src="https://dummyimage.com/201x201"
@@ -211,7 +212,7 @@ export default function Carisma() {
               </div>
               <div className="p-4 lg:w-1/4 md:w-1/2">
                 <div className="h-full flex flex-col items-center text-center">
-                  <img
+                  <Image
                     alt="team"
                     className="flex-shrink-0 rounded-lg w-full h-56 object-cover object-center mb-4"
                     src="https://dummyimage.com/201x201"
@@ -271,7 +272,7 @@ export default function Carisma() {
               </div>
               <div className="p-4 lg:w-1/4 md:w-1/2">
                 <div className="h-full flex flex-col items-center text-center">
-                  <img
+                  <Image
                     alt="team"
                     className="flex-shrink-0 rounded-lg w-full h-56 object-cover object-center mb-4"
                     src="https://dummyimage.com/202x202"
@@ -331,7 +332,7 @@ export default function Carisma() {
               </div>
               <div className="p-4 lg:w-1/4 md:w-1/2">
                 <div className="h-full flex flex-col items-center text-center">
-                  <img
+                  <Image
                     alt="team"
                     className="flex-shrink-0 rounded-lg w-full h-56 object-cover object-center mb-4"
                     src="https://dummyimage.com/203x203"

@@ -25,7 +25,7 @@ import {
   TableRow,
 } from "@tremor/react";
 import ICidade from "../../model/ICidade";
-import { BeatLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";
 import ILocalidade from "../../model/ILocalidade";
 
 const initialState: IPais = {
@@ -97,7 +97,7 @@ export default function Comunidade(): JSX.Element {
             </Badge>
           </div>
         ) : (
-          <BeatLoader />
+          <ClipLoader color="#459400" size={22} speedMultiplier={1} />
         )}
       </div>
     );
@@ -124,7 +124,7 @@ export default function Comunidade(): JSX.Element {
             <Badge color={paroquias === 0 ? "red" : "green"}>{paroquias}</Badge>
           </div>
         ) : (
-          <BeatLoader />
+          <ClipLoader color="#459400" size={22} speedMultiplier={1} />
         )}
       </div>
     );
@@ -132,65 +132,61 @@ export default function Comunidade(): JSX.Element {
 
   return (
     <RootLayout>
-      <div className="p-6 w-full">
-        <TituloDashboard
-          titulo="Comunidade"
-          subTitulo="Selecione um país / estado"
-        />
+      <TituloDashboard
+        titulo="Comunidade"
+        subTitulo="Selecione um país / estado"
+      />
 
-        <Select
-          className="mt-6 mb-3 shadow-lg"
-          onChange={(op) => onChangeSelectPais(op)}
-          options={optionsPaises}
-          defaultValue={{ value: 1, label: "Brasil" }}
-          placeholder="Selecione um pais"
-        />
+      <Select
+        className="mt-6 mb-3 shadow-lg"
+        onChange={(op) => onChangeSelectPais(op)}
+        options={optionsPaises}
+        defaultValue={{ value: 1, label: "Brasil" }}
+        placeholder="Selecione um pais"
+      />
 
-        <div className="flex justify-center">
-          <Card className="mt-4 max-w-screen-xl shadow-2xl">
-            <Table className="">
-              <TableHead>
-                <TableRow>
-                  <TableHeaderCell>
-                    {pais.no_pais} - UF - Estados
-                  </TableHeaderCell>
-                  <TableHeaderCell className="text-center">
-                    Cidades
-                  </TableHeaderCell>
-                  <TableHeaderCell className="text-center">
-                    Paróquias
-                  </TableHeaderCell>
-                  <TableHeaderCell className="text-center">
-                    Mais detalhes
-                  </TableHeaderCell>
-                </TableRow>
-              </TableHead>
+      <div className="flex justify-center">
+        <Card className="mt-4 max-w-screen-xl shadow-2xl">
+          <Table className="">
+            <TableHead>
+              <TableRow>
+                <TableHeaderCell>{pais.no_pais} - UF - Estados</TableHeaderCell>
+                <TableHeaderCell className="text-center">
+                  Cidades
+                </TableHeaderCell>
+                <TableHeaderCell className="text-center">
+                  Paróquias
+                </TableHeaderCell>
+                <TableHeaderCell className="text-center">
+                  Mais detalhes
+                </TableHeaderCell>
+              </TableRow>
+            </TableHead>
 
-              <TableBody>
-                {estados
-                  .filter((uf) => uf.id_pais === pais.id_pais)
-                  .map((estado: IEstado) => (
-                    <TableRow key={`${estado.id_estado}`}>
-                      <TableCell>
-                        {estado.sg_estado} - {estado.no_estado}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {renderTableCellCidade(estado)}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {renderTableCellParoquia(estado)}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        <Button size="xs" variant="secondary" color="green">
-                          Mais detalhes
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </Card>
-        </div>
+            <TableBody>
+              {estados
+                .filter((uf) => uf.id_pais === pais.id_pais)
+                .map((estado: IEstado) => (
+                  <TableRow key={`${estado.id_estado}`}>
+                    <TableCell>
+                      {estado.sg_estado} - {estado.no_estado}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      {renderTableCellCidade(estado)}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      {renderTableCellParoquia(estado)}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <Button size="xs" variant="secondary" color="green">
+                        Mais detalhes
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </Card>
       </div>
     </RootLayout>
   );

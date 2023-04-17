@@ -25,16 +25,16 @@ interface IMenus {
 
 const menus: IMenus[] = [
   { href: "/", title: "Dashboard", icone: <MdOutlineSpaceDashboard /> },
-  {
-    href: "/",
-    title: "Carimas",
-    icone: <MdOutlineEmojiPeople />,
-    submenu: true,
-    submenuItems: [
-      { href: "/carisma", title: "Levantados" },
-      { href: "/carisma", title: "Matrimonio" },
-    ],
-  },
+  // {
+  //   href: "/",
+  //   title: "Carimas",
+  //   icone: <MdOutlineEmojiPeople />,
+  //   submenu: true,
+  //   submenuItems: [
+  //     { href: "/carisma", title: "Levantados" },
+  //     { href: "/carisma", title: "Matrimonio" },
+  //   ],
+  // },
   { href: "/equipe", title: "Equipe", spacing: true, icone: <IoIosPeople /> },
   { href: "/pessoa", title: "Pessoas", icone: <IoPeopleSharp /> },
   {
@@ -57,7 +57,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`bg-green-800 h-screen p-5 pt-8
+      className={`bg-green-800 p-5 pt-8
         ${sidebarOpen ? "w-72" : "w-20"} duration-300 relative`}
     >
       <BiArrowFromRight

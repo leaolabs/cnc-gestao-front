@@ -4,6 +4,7 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { GetServerSideProps } from "next";
 import { validarUsuarioAutenticado } from "../utils/utils";
+import Footer from "../components/footer/Footer";
 
 export default function RootLayout({ children }: any): JSX.Element {
   const { user } = useContext(AuthContext);
@@ -20,8 +21,9 @@ export default function RootLayout({ children }: any): JSX.Element {
       <main>
         <div className="flex">
           <Sidebar />
-          <div className="p-4 w-full">{children}</div>
+          <div className="p-4 w-full h-auto">{children}</div>
         </div>
+        <Footer />
       </main>
     </>
   );

@@ -9,6 +9,7 @@ import { EquipesData, TipoEquipesData } from "../api/cncApi";
 import Carregando from "../carregando";
 import ErroCarregamento from "../erroCarregamento";
 import { removerAcento, validarUsuarioAutenticado } from "../../utils/utils";
+import { IconeComunidade } from "../../utils/Icones";
 
 export default function Equipe() {
   const [search, setSearch] = useState("");
@@ -48,16 +49,15 @@ export default function Equipe() {
   return (
     <RootLayout>
       <TituloDashboard titulo="Equipe" subTitulo="Equipes do caminho" />
-      {/* 
 
       <InputPequisa
         onChange={(e) => setSearch(e.target.value)}
         valor={search}
         placeholder="Nome da pessoa ..."
         icone={IconeComunidade}
-      /> */}
+      />
 
-      <div className="flex flex-wrap gap-4 mt-1">
+      <div className="flex flex-wrap gap-4">
         <section className="text-gray-600 body-font">
           <div className="container px-5 py-24 mx-auto">
             <div className="flex flex-wrap -m-2">
@@ -68,21 +68,6 @@ export default function Equipe() {
                 : equipes
                     .map((e: IEquipe) => renderSquadCard(e, tipoEquipes))
                     .slice(0, 21)}
-              <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-                <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <img
-                    alt="team"
-                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                    src="https://dummyimage.com/80x80"
-                  />
-                  <div className="flex-grow">
-                    <h2 className="text-gray-900 title-font font-medium">
-                      Holden Caulfield
-                    </h2>
-                    <p className="text-gray-500">UI Designer</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </section>

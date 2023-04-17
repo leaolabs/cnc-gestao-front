@@ -50,7 +50,6 @@ function getAPIClient(ctx?: any) {
     baseURL: BASE_URL,
   });
   apiCNC.interceptors.request.use((config) => {
-    console.log(config);
     return config;
   });
 

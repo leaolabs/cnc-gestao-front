@@ -29,10 +29,7 @@ export function ComunidadesData() {
 }
 
 export function LocalidadesData() {
-  const { data, error } = useSWRImmutable(
-    `${LOCAL_URL_API}/cnc/localidades`,
-    fetcher
-  );
+  const { data, error } = useSWRImmutable(`${LOCAL_URL_API}/cnc/localidades`, fetcher);
 
   return {
     localidadesData: data,
@@ -42,10 +39,7 @@ export function LocalidadesData() {
 }
 
 export function CidadesData() {
-  const { data, error } = useSWRImmutable(
-    `${LOCAL_URL_API}/cnc/cidades`,
-    fetcher
-  );
+  const { data, error } = useSWRImmutable(`${LOCAL_URL_API}/cnc/cidades`, fetcher);
 
   return {
     cidadesData: data,
@@ -55,10 +49,7 @@ export function CidadesData() {
 }
 
 export function EstadosData() {
-  const { data, error } = useSWRImmutable(
-    `${LOCAL_URL_API}/cnc/estados`,
-    fetcher
-  );
+  const { data, error } = useSWRImmutable(`${LOCAL_URL_API}/cnc/estados`, fetcher);
 
   return {
     estadosData: data,
@@ -68,10 +59,7 @@ export function EstadosData() {
 }
 
 export function PaisesData() {
-  const { data, error } = useSWRImmutable(
-    `${LOCAL_URL_API}/cnc/paises`,
-    fetcher
-  );
+  const { data, error } = useSWRImmutable(`${LOCAL_URL_API}/cnc/paises`, fetcher);
 
   return {
     paisesData: data,
@@ -81,10 +69,7 @@ export function PaisesData() {
 }
 
 export function TipoDiocesesData() {
-  const { data, error } = useSWRImmutable(
-    `${LOCAL_URL_API}/cnc/tipo_dioceses`,
-    fetcher
-  );
+  const { data, error } = useSWRImmutable(`${LOCAL_URL_API}/cnc/tipo_dioceses`, fetcher);
 
   return {
     tipoDiocesesData: data,
@@ -94,10 +79,7 @@ export function TipoDiocesesData() {
 }
 
 export function TipoLocaisData() {
-  const { data, error } = useSWRImmutable(
-    `${LOCAL_URL_API}/cnc/tipo_locais`,
-    fetcher
-  );
+  const { data, error } = useSWRImmutable(`${LOCAL_URL_API}/cnc/tipo_locais`, fetcher);
 
   return {
     tipoLocaisData: data,
@@ -107,7 +89,7 @@ export function TipoLocaisData() {
 }
 
 export function TipoCarismaComunidades() {
-  const { data, error, isLoading } = useSWRImmutable(
+  const { data, error, isLoading } = useSWR(
     `${LOCAL_URL_API}/cnc/tipo_carisma_comunidades`,
     fetcher,
     { refreshInterval: 5000 }
@@ -120,7 +102,7 @@ export function TipoCarismaComunidades() {
 }
 
 export function TipoEquipesData() {
-  const { data, error, isLoading } = useSWRImmutable(
+  const { data, error, isLoading } = useSWR(
     `${LOCAL_URL_API}/cnc/tipo_equipes`,
     fetcher
   );
@@ -136,7 +118,7 @@ export function EquipesData() {
     `${LOCAL_URL_API}/cnc/equipes`,
     fetcherWithToken,
     {
-      refreshInterval: 3000,
+      revalidateOnFocus: false,
     }
   );
   return {

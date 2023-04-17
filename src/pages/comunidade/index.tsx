@@ -59,13 +59,25 @@ export default function Comunidade(): JSX.Element {
     [estadosData]
   );
 
-  const { cidadesData } = CidadesData();
-  useEffect(() => (cidadesData ? setCidades(cidadesData.data) : undefined));
+  const { cidadesData, isErrorCidade } = CidadesData();
+  useEffect(
+    function persistEstados() {
+      if (cidadesData) {
+        setCidades(cidadesData.data);
+      }
+    },
+    [cidadesData]
+  );
 
   const { localidadesData } = LocalidadesData();
   const [localidades, setLocalidades] = useState<ILocalidade[]>();
-  useEffect(() =>
-    localidadesData ? setLocalidades(localidadesData.data) : undefined
+  useEffect(
+    function persistEstados() {
+      if (localidadesData) {
+        setLocalidades(localidadesData.data);
+      }
+    },
+    [localidadesData]
   );
 
   if (!paises) return <Carregando objetoCarregando="Paises" />;
